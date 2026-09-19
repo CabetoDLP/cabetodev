@@ -1,0 +1,340 @@
+---
+import { languages, ui } from '../language/ui';
+
+interface Props {
+  lang?: keyof typeof languages | keyof typeof ui;
+}
+
+const { lang = 'spanish' } = Astro.props;
+const currentLang = (lang === 'es' ? 'spanish' : lang === 'en' ? 'english' : lang) as 'spanish' | 'english';
+const t = ui[currentLang] || ui.spanish;
+
+const isEnglish = currentLang === 'english';
+
+const projects = [
+  {
+    id: 'rocaire',
+    title: 'Rocaire Constructora',
+    subtitle: isEnglish ? 'Corporate Web Platform' : 'Sitio Web Corporativo',
+    video: '/demo-videos/rocaire.webm',
+    demoUrl: 'https://www.rocaireconstructora.com/',
+    githubUrl: 'https://github.com/CabetoDLP/rocaire-landing-page',
+    description: isEnglish
+      ? 'Modern corporate landing page designed for a construction firm to showcase engineering projects, structural services, and direct client communication channels.'
+      : 'Página web corporativa moderna para empresa constructora, orientada a exhibir proyectos de ingeniería, portafolio de obras y canales de contacto directo.',
+    details: isEnglish
+      ? [
+          'High visual impact interface with clean modern layout and dark/light accents.',
+          'Optimized for search engines (SEO) and fast performance.',
+          'Fully responsive design for desktop, tablet, and mobile devices.'
+        ]
+      : [
+          'Diseño de alto impacto visual con maquetación moderna y estética limpia.',
+          'Optimizado para motores de búsqueda (SEO) y tiempos de respuesta rápidos.',
+          'Diseño 100% adaptativo para dispositivos móviles, tablets y escritorios.'
+        ],
+    techs: [
+      { name: 'Next.js', icon: '/Technologies/nextjs.svg' },
+      { name: 'TypeScript', icon: '/Technologies/typescript.svg' },
+      { name: 'Tailwind CSS', icon: '/Technologies/tailwind.svg' },
+      { name: 'Vercel', icon: '/Technologies/vercel.svg' }
+    ],
+    color: '#F59E0B'
+  },
+  {
+    id: 'reactStore',
+    title: isEnglish ? 'Marketplace Platform (ReactStore)' : 'Plataforma Marketplace (ReactStore)',
+    subtitle: isEnglish ? 'Full Stack & Real-Time E-commerce' : 'E-commerce Full Stack & Tiempo Real',
+    video: '/demo-videos/reactstore.webm',
+    demoUrl: 'https://react-store-frontend-three.vercel.app/login',
+    githubUrl: 'https://github.com/CabetoDLP/ReactStore-Frontend',
+    description: isEnglish
+      ? 'Scalable Full Stack marketplace platform allowing users to securely post, explore, and manage products. Integrates real-time communication between buyers and sellers via WebSockets.'
+      : 'Plataforma marketplace Full Stack escalable que permite publicar, explorar y gestionar productos de forma segura. Integra comunicación en tiempo real entre compradores y vendedores mediante WebSockets.',
+    details: isEnglish
+      ? [
+          'Robust authentication and authorization implementing JWT and HTTP-Only Cookies.',
+          'Interactive real-time chat powered by Socket.IO.',
+          'Cloud image management and optimization with Cloudinary.',
+          'Distributed deployment: Frontend on Render and Backend/Database on Render.'
+        ]
+      : [
+          'Autenticación y autorización robusta implementando JWT y HTTP-Only Cookies.',
+          'Chat interactivo en tiempo real integrado con Socket.IO.',
+          'Gestión y optimización de imágenes en la nube con Cloudinary.',
+          'Despliegue distribuido: Frontend en Render y Backend/Base de datos en Render.'
+        ],
+    techs: [
+      { name: 'React', icon: '/Technologies/react.svg' },
+      { name: 'TypeScript', icon: '/Technologies/typescript.svg' },
+      { name: 'Material UI', icon: '/Technologies/materialui.svg' },
+      { name: 'Node.js', icon: '/Technologies/nodejs.svg' },
+      { name: 'PostgreSQL', icon: '/Technologies/postgresql.svg' },
+      { name: 'Azure', icon: '/Technologies/azure.svg' },
+      { name: 'Render', icon: '/Technologies/render.svg' }
+    ],
+    color: '#EF4444'
+  },
+  {
+    id: 'cabetoArt',
+    title: 'Cabeto.Art',
+    subtitle: 'Digital Art Portfolio & Commission Hub',
+    video: '/demo-videos/cabetoart.webm',
+    demoUrl: 'https://cabeto-art.vercel.app',
+    githubUrl: 'https://github.com/CabetoDLP/CabetoArt-NextJS',
+    description: isEnglish
+      ? 'Interactive portfolio for showcasing digital artwork and managing art clients. Optimized for visual performance and organic search engine discovery.'
+      : 'Portafolio interactivo para la exhibición de ilustraciones digitales y gestión de clientes de arte. Optimizado para alto rendimiento visual y descubrimiento orgánico en motores de búsqueda.',
+    details: isEnglish
+      ? [
+          'Structured data metadata (Schema.org ImageObject) implementation for Google Rich Results.',
+          'Lazy loading and automated optimization for over 150 artwork pieces.',
+          'Responsive design tailored with neon/cyberpunk aesthetics.'
+        ]
+      : [
+          'Implementación de metadatos de datos estructurados (Schema.org ImageObject) para Google Rich Results.',
+          'Carga diferida y optimización automatizada de más de 150 piezas de arte.',
+          'Diseño responsive adaptado a estéticas neón/cyberpunk.'
+        ],
+    techs: [
+      { name: 'Next.js', icon: '/Technologies/nextjs.svg' },
+      { name: 'Tailwind CSS', icon: '/Technologies/tailwind.svg' },
+      { name: 'TypeScript', icon: '/Technologies/typescript.svg' },
+      { name: 'Render', icon: '/Technologies/render.svg' }
+    ],
+    color: '#06B6D4'
+  },
+  {
+    id: 'dinoLink',
+    title: 'Dino Link',
+    subtitle: isEnglish ? 'Local Multiplayer Arcade Game' : 'Juego Arcade Multijugador Local',
+    video: '/demo-videos/dinolink.webm',
+    demoUrl: 'https://dino-link.vercel.app/',
+    githubUrl: 'https://github.com/CabetoDLP/Dino-Link',
+    description: isEnglish
+      ? 'A modern reimagining of Google Chrome’s classic runner game, featuring local multiplayer action, dynamic background color transitions, and enhanced visual aesthetics.'
+      : 'Reinvención moderna del clásico juego del dinosaurio de Google Chrome, adaptado con modo multijugador local, cambios dinámicos en los colores de fondo y una estética visual renovada.',
+    details: isEnglish
+      ? [
+          'Local 2-player multiplayer mode (Player 1: Arrows, Player 2: W/S keys).',
+          'Dynamic background color changes and improved pixel art aesthetics.',
+          'Real-time collision detection and score tracking built with lightweight web technologies.'
+        ]
+      : [
+          'Modo multijugador local para 2 jugadores (Jugador 1: Flechas, Jugador 2: Teclas W/S).',
+          'Cambios dinámicos de color de fondo y estética pixel art mejorada.',
+          'Detección de colisiones e incremento de puntuación en tiempo real.'
+        ],
+    techs: [
+      { name: 'React', icon: '/Technologies/react.svg' },
+      { name: 'Tailwind CSS', icon: '/Technologies/tailwind.svg' },
+      { name: 'TypeScript', icon: '/Technologies/typescript.svg' },
+      { name: 'Vercel', icon: '/Technologies/vercel.svg' }
+    ],
+    color: '#10B981'
+  },
+  {
+    id: 'bazaarApp',
+    title: isEnglish ? 'Online Bazaar' : 'Bazar Online',
+    subtitle: 'MERN Stack Web Platform',
+    video: '/demo-videos/bazaronline.webm',
+    demoUrl: 'https://bazaar-app-frontend.vercel.app/',
+    githubUrl: 'https://github.com/CabetoDLP/Bazaar-app-Frontend',
+    description: isEnglish
+      ? 'Complete web application for product search, filtering, and commercial catalog management with cloud hybrid deployment.'
+      : 'Aplicación web completa para búsqueda, filtrado y gestión de catálogos de productos comerciales con soporte para múltiples almacenamiento NoSQL y despliegue híbrido cloud.',
+    details: isEnglish
+      ? [
+          'Dynamic product search and filtering.',
+          'Data persistence using MongoDB and Express.js.',
+          'Seamless integration with Cloudinary for asset management.'
+        ]
+      : [
+          'Búsqueda y filtrado dinámico de productos.',
+          'Persistencia de datos utilizando MongoDB y Express.js.',
+          'Integración fluida con Cloudinary para asset management.'
+        ],
+    techs: [
+      { name: 'React', icon: '/Technologies/react.svg' },
+      { name: 'Tailwind CSS', icon: '/Technologies/tailwind.svg' },
+      { name: 'TypeScript', icon: '/Technologies/typescript.svg' },
+      { name: 'Node.js', icon: '/Technologies/nodejs.svg' },
+      { name: 'MongoDB', icon: '/Technologies/mongodb.svg' },
+      { name: 'Azure', icon: '/Technologies/azure.svg' },
+      { name: 'Vercel', icon: '/Technologies/vercel.svg' },
+      { name: 'Cloudinary', icon: '/Technologies/cloudinary.svg' }
+    ],
+    color: '#8B5CF6'
+  }
+];
+---
+
+<section id="projects" class="relative py-20 px-4 sm:px-6 max-w-7xl mx-auto overflow-hidden" data-labels={JSON.stringify({
+  keyAspects: t.modalKeyAspects,
+  stackUsed: t.modalStackUsed,
+  liveDemo: t.modalLiveDemo,
+  githubRepo: t.modalGithubRepo
+})}>
+  <div class="mb-14 text-center md:text-left">
+    <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white flex items-center justify-center md:justify-start gap-3">
+      <span class="text-red-500">//</span> {t.projectsTitle}
+    </h2>
+    <p class="text-slate-400 text-base max-w-2xl mt-2 leading-relaxed">
+      {t.projectsText}
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {projects.map((proj) => (
+      <div class="perspective-container">
+        <div
+          class="card-3d project-card relative group rounded-2xl bg-slate-950/80 border overflow-hidden cursor-pointer transition-all duration-500 backdrop-blur-xl flex flex-col justify-between"
+          style={`border-color: ${proj.color}40; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.8), 0 0 20px ${proj.color}15;`}
+          data-project={JSON.stringify(proj)}
+        >
+          <div class="relative w-full aspect-video overflow-hidden bg-slate-900">
+            <video
+              src={proj.video}
+              autoplay
+              muted
+              loop
+              playsinline
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
+            ></video>
+
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+
+            <div class="absolute top-4 right-4 backdrop-blur-md bg-slate-950/80 border border-slate-800 px-3 py-1 rounded-full text-[11px] font-mono text-white flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full" style={`background-color: ${proj.color}; shadow: 0 0 8px ${proj.color}`}></span>
+              {t.projectBadgeDetails}
+            </div>
+          </div>
+
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-2xl font-bold text-white group-hover:text-red-400 transition-colors">
+                {proj.title}
+              </h3>
+              <p class="text-xs font-mono text-slate-400 mt-1">
+                {proj.subtitle}
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 mt-6 pt-4 border-t border-slate-800/80 w-full">
+              {proj.techs.map((tech) => (
+                <div class="w-7 h-7 p-1 rounded-lg bg-slate-900/90 border border-slate-800 flex items-center justify-center shrink-0" title={tech.name}>
+                  <img src={tech.icon} alt={tech.name} class="w-full h-full object-contain" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="relative w-full max-w-2xl rounded-2xl bg-slate-950 border border-red-500/40 p-6 sm:p-8 shadow-[0_0_50px_rgba(239,68,68,0.25)] transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto">
+      <button id="close-modal" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-900 border border-slate-800 text-slate-400 hover:text-white flex items-center justify-center text-lg transition-colors">
+        ✕
+      </button>
+
+      <div id="modal-content"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .perspective-container {
+    perspective: 1000px;
+  }
+
+  .card-3d {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .perspective-container:hover .card-3d {
+    transform: rotateX(4deg) rotateY(-2deg) translateZ(10px);
+  }
+
+  @media (max-width: 640px) {
+    .perspective-container:hover .card-3d {
+      transform: translateY(-4px);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.getElementById('projects');
+    const labels = JSON.parse(section?.getAttribute('data-labels') || '{}');
+    const cards = document.querySelectorAll('.project-card');
+    const modal = document.getElementById('project-modal');
+    const closeModalBtn = document.getElementById('close-modal');
+    const modalContent = document.getElementById('modal-content');
+
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const proj = JSON.parse(card.getAttribute('data-project') || '{}');
+        if (!proj || !modalContent) return;
+
+        modalContent.innerHTML = `
+          <div class="space-y-6">
+            <div>
+              <span class="text-xs font-mono px-3 py-1 rounded-full border uppercase" style="color: ${proj.color}; background-color: ${proj.color}15; border-color: ${proj.color}40;">
+                ${proj.subtitle}
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-black text-white mt-3">${proj.title}</h2>
+            </div>
+
+            <p class="text-slate-300 text-sm leading-relaxed">
+              ${proj.description}
+            </p>
+
+            <div class="space-y-2">
+              <h4 class="text-xs font-mono uppercase text-slate-400 tracking-wider">${labels.keyAspects || '// Aspectos Clave & Arquitectura'}</h4>
+              <ul class="space-y-1.5">
+                ${proj.details.map((d: string) => `<li class="flex items-start gap-2 text-xs text-slate-300"><span class="text-red-500">▸</span>${d}</li>`).join('')}
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="text-xs font-mono uppercase text-slate-400 tracking-wider mb-2">${labels.stackUsed || '// Stack Utilizado'}</h4>
+              <div class="flex flex-wrap gap-2 w-full">
+                ${proj.techs.map((t: { name: string; icon: string }) => `
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-200 shrink-0">
+                    <img src="${t.icon}" alt="${t.name}" class="w-4 h-4 object-contain" />
+                    <span>${t.name}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-4 pt-4 border-t border-slate-800">
+              <a href="${proj.demoUrl}" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 rounded-xl font-bold text-xs uppercase bg-red-600 text-white shadow-[0_0_20px_rgba(220,38,38,0.4)] hover:bg-red-500 transition-all">
+                ${labels.liveDemo || 'Ver Proyecto Live'}
+              </a>
+              <a href="${proj.githubUrl}" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 rounded-xl font-bold text-xs uppercase bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800 transition-all">
+                ${labels.githubRepo || 'GitHub Repository'}
+              </a>
+            </div>
+          </div>
+        `;
+
+        modal?.classList.remove('opacity-0', 'pointer-events-none');
+        modal?.firstElementChild?.classList.remove('scale-95');
+      });
+    });
+
+    const closeModal = () => {
+      modal?.classList.add('opacity-0', 'pointer-events-none');
+      modal?.firstElementChild?.classList.add('scale-95');
+    };
+
+    closeModalBtn?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  });
+</script>

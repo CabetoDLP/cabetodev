@@ -1,0 +1,132 @@
+---
+import { languages, ui } from '../language/ui';
+
+interface Props {
+  lang?: keyof typeof languages | keyof typeof ui;
+}
+
+const { lang = 'spanish' } = Astro.props;
+const currentLang = (lang === 'es' ? 'spanish' : lang === 'en' ? 'english' : lang) as 'spanish' | 'english';
+const t = ui[currentLang] || ui.spanish;
+
+const educationList = [
+  {
+    degree: t.degreeTitle,
+    institution: t.institutionName,
+    period: t.degreePeriod,
+    status: t.degreeStatus,
+    logo: '/icons/unimag.png',
+    description: t.degreeDescription,
+    highlights: currentLang === 'english' ? [
+      'Focus on Full Stack development and Clean Architecture.',
+      'Strong background in Object-Oriented Programming (OOP) and Design Patterns.',
+      'Development and implementation of enterprise web applications.'
+    ] : [
+      'Enfoque en desarrollo Full Stack y arquitectura limpia.',
+      'Sólidas bases en Programación Orientada a Objetos (POO) y patrones de diseño.',
+      'Desarrollo e implementación de proyectos web empresariales.'
+    ],
+    color: '#3B82F6'
+  }
+];
+---
+
+<section id="education" class="relative py-20 px-4 sm:px-6 max-w-6xl mx-auto overflow-hidden">
+  <div class="mb-14 text-center md:text-left">
+    <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white flex items-center justify-center md:justify-start gap-3">
+      <span class="text-red-500">//</span> {t.aStudiesTitle}
+    </h2>
+    <p class="text-slate-400 text-base max-w-2xl mt-2 leading-relaxed">
+      {t.studiesText}
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {educationList.map((item) => (
+      <div class="perspective-container">
+        <div 
+          class="card-3d relative p-6 sm:p-8 rounded-2xl bg-slate-950/80 border backdrop-blur-xl transition-all duration-500 h-full flex flex-col justify-between group"
+          style={`
+            border-color: ${item.color}40;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.8), 0 0 25px ${item.color}15;
+          `}
+        >
+          <div 
+            class="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl pointer-events-none"
+            style={`background: ${item.color};`}
+          ></div>
+
+          <div>
+            <div class="flex items-start justify-between gap-4 mb-6">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 p-2.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-center justify-center shadow-lg group-hover:border-blue-500/50 transition-colors">
+                <img 
+                  src={item.logo} 
+                  alt={item.institution} 
+                  class="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
+                />
+              </div>
+
+              <span 
+                class="inline-block text-xs font-mono font-semibold tracking-wider uppercase px-3 py-1 rounded-full border"
+                style={`color: ${item.color}; background-color: ${item.color}15; border-color: ${item.color}40;`}
+              >
+                {item.period} • {item.status}
+              </span>
+            </div>
+
+            <h3 class="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+              {item.degree}
+            </h3>
+            <p class="text-sm font-semibold text-slate-400 mt-1">
+              {item.institution}
+            </p>
+
+            <p class="text-slate-300 text-sm leading-relaxed mt-4">
+              {item.description}
+            </p>
+
+            <ul class="space-y-2 mt-4">
+              {item.highlights.map((point) => (
+                <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-400">
+                  <span class="text-blue-500 mt-0.5">▸</span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-slate-500 uppercase tracking-widest">
+              {t.degreeBadge}
+            </span>
+            <div 
+              class="w-2.5 h-2.5 rounded-full shadow-[0_0_10px_currentColor]"
+              style={`background-color: ${item.color}; color: ${item.color};`}
+            ></div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .perspective-container {
+    perspective: 1000px;
+  }
+
+  .card-3d {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .perspective-container:hover .card-3d {
+    transform: rotateX(6deg) rotateY(-4deg) translateZ(12px);
+  }
+
+  @media (max-width: 640px) {
+    .perspective-container:hover .card-3d {
+      transform: translateY(-4px);
+    }
+  }
+</style>

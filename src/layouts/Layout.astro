@@ -1,0 +1,122 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'spanish' | 'english' | 'es' | 'en';
+}
+
+const { 
+  title = 'Carlos de la Peña | Full Stack Engineer & Software Developer', 
+  description = 'Portafolio profesional de Carlos Alberto de la Peña Jácome. Ingeniero de Sistemas y Desarrollador Full Stack especializado en React, Next.js, Node.js y C#.',
+  lang = 'spanish' 
+} = Astro.props;
+
+const siteUrl = 'https://cabetodev.onrender.com'; // Dominio de cabeto dev
+const currentLang = (lang === 'en' || lang === 'english') ? 'en' : 'es';
+
+// Schema JSON-LD de Persona / Desarrollador para motores de búsqueda
+const jsonLdPerson = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Carlos Alberto de la Peña Jácome',
+  alternateName: ['Carlos de la Peña', 'CabetoDev', 'Cabeto'],
+  url: siteUrl,
+  jobTitle: 'Full Stack Engineer',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Freelance / Full Stack Engineer'
+  },
+  sameAs: [
+    'https://github.com/CarlosDeLaPena',
+    'https://github.com/CabetoDLP',
+    'https://www.linkedin.com/in/carlosdelapenaj'
+  ]
+};
+
+const jsonLdWebSite = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'CabetoDev',
+  alternateName: ['Carlos de la Peña Portfolio', 'Cabeto Dev'],
+  url: siteUrl
+};
+---
+
+<!DOCTYPE html>
+<html lang={currentLang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Principal -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Carlos Alberto de la Peña Jácome" />
+    <meta name="keywords" content="Carlos de la Peña, CabetoDev, Full Stack Engineer, Software Developer, React, Next.js, Node.js, TypeScript, Astro, Systems Engineer, Portafolio" />
+    <link rel="canonical" href={siteUrl} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}/favicon-512x512.png`} />
+    <meta property="og:site_name" content="CabetoDev" />
+    <meta property="og:locale" content={currentLang === 'es' ? 'es_CO' : 'en_US'} />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}/favicon-512x512.png`} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192x192.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Space+Grotesk:wght@400;600;700&display=swap" 
+      rel="stylesheet" 
+    />
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdPerson)} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdWebSite)} />
+  </head>
+  
+  <body class="bg-slate-950 text-white font-sans min-h-screen relative overflow-x-hidden selection:bg-red-500 selection:text-white">
+    <!-- Capas de fondo y ambientación -->
+    <div class="fixed inset-0 bg-[linear-gradient(to_right,#1f293750_1px,transparent_1px),linear-gradient(to_bottom,#1f293750_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_50%_80%_at_50%_50%,#000_85%,transparent_100%)] pointer-events-none z-0"></div>
+    <div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/20 rounded-full blur-[140px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-10 right-10 w-[350px] h-[350px] bg-purple-600/15 rounded-full blur-[120px] pointer-events-none z-0"></div>
+
+    <!-- Contenido inyectado -->
+    <div class="relative z-10">
+      <slot />
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  @import "tailwindcss";
+
+  :root {
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+</style>

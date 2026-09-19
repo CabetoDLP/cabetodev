@@ -1,0 +1,78 @@
+---
+import { languages, ui } from '../language/ui';
+
+interface Props {
+  lang?: keyof typeof languages | keyof typeof ui;
+}
+
+const { lang = 'spanish' } = Astro.props;
+const currentLang = (lang === 'es' ? 'spanish' : lang === 'en' ? 'english' : lang) as 'spanish' | 'english';
+const t = ui[currentLang] || ui.spanish;
+---
+
+<section id="presentation" class="relative flex items-center justify-center px-6 pt-28 pb-12 sm:pt-32 sm:pb-16 max-w-6xl mx-auto">
+  <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+    
+    <div class="flex flex-col items-start gap-5">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/60 border border-red-500/40 text-red-400 text-xs font-mono tracking-widest uppercase shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+        {t.heroBadge}
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl xl:text-6xl font-black tracking-tight uppercase leading-none">
+        {t.heroFirstName} <br />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-purple-500 drop-shadow-[0_0_25px_rgba(244,63,94,0.6)]">
+          {t.heroLastName}
+        </span> <br />
+        <span class="text-transparent [-webkit-text-stroke:1.5px_#f43f5e] opacity-90">
+          {t.heroRole}
+        </span>
+      </h1>
+
+      <p class="text-slate-400 text-base max-w-lg leading-relaxed">
+        {t.descriptionText}
+      </p>
+
+      <div class="flex flex-wrap gap-4 pt-1">
+        <a
+          href="#projects"
+          class="relative group px-7 py-3 rounded-xl font-bold text-sm tracking-wider uppercase transition-all duration-300 bg-red-600 text-white shadow-[0_0_25px_rgba(220,38,38,0.5)] hover:shadow-[0_0_35px_rgba(220,38,38,0.8)] hover:bg-red-500 active:scale-95"
+        >
+          {t.aProjectsText}
+        </a>
+
+        <a
+          href="#contact"
+          class="px-7 py-3 rounded-xl font-bold text-sm tracking-wider uppercase transition-all duration-300 bg-slate-900/80 text-slate-200 border border-red-500/30 hover:border-red-500/80 hover:bg-slate-800 hover:shadow-[0_0_20px_rgba(239,68,68,0.25)] active:scale-95"
+        >
+          {t.aContactText}
+        </a>
+      </div>
+    </div>
+
+    <div class="relative flex justify-center items-center">
+      <div class="absolute inset-0 bg-gradient-to-tr from-red-600 to-purple-600 rounded-[2.5rem] blur-2xl opacity-50 animate-pulse"></div>
+
+      <div class="relative p-2 bg-slate-900/90 border border-red-500/50 rounded-[2.5rem] backdrop-blur-xl shadow-[0_0_40px_rgba(220,38,38,0.25)] max-w-sm sm:max-w-md w-full">
+        <div class="relative rounded-[2rem] overflow-hidden bg-slate-950 aspect-[4/4.5] flex items-center justify-center border border-red-500/20">
+          <img
+            src="https://res.cloudinary.com/dzipy5bme/image/upload/f_auto,q_auto/v1/Porfolio/Images/cabetoDev"
+            alt="Carlos de la Peña"
+            class="w-full h-full object-cover mix-blend-luminosity hover:mix-blend-normal hover:scale-105 transition-all duration-700"
+          />
+          
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+          
+          <div class="absolute bottom-5 left-5 right-5 p-3.5 rounded-xl bg-slate-900/80 border border-red-500/30 backdrop-blur-md flex items-center justify-between">
+            <div>
+              <p class="text-[10px] font-mono text-red-400">{t.heroStatusLabel}</p>
+              <p class="text-xs sm:text-sm font-bold text-white">{t.heroStatusValue}</p>
+            </div>
+            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

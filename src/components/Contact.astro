@@ -1,0 +1,147 @@
+---
+import { languages, ui } from '../language/ui';
+
+interface Props {
+  lang?: keyof typeof languages | keyof typeof ui;
+}
+
+const { lang = 'spanish' } = Astro.props;
+const currentLang = (lang === 'es' ? 'spanish' : lang === 'en' ? 'english' : lang) as 'spanish' | 'english';
+const t = ui[currentLang] || ui.spanish;
+---
+
+<section id="contact" class="relative py-20 px-6 max-w-5xl mx-auto z-10">
+  <div class="mb-12 text-center space-y-3">
+    <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
+      <span class="text-red-500">//</span> {t.contactTitle}
+    </h2>
+    <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto font-sans">
+      {t.contactSubtitle}
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+      
+      <a 
+        href="https://instagram.com/cabeto.art" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="group p-5 bg-slate-900/80 border border-slate-800 hover:border-pink-500/50 rounded-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(236,72,153,0.25)] flex flex-col items-center text-center gap-3"
+      >
+        <div class="p-3 bg-pink-500/10 rounded-xl text-pink-400 group-hover:scale-110 transition-transform">
+          <img src="/icons/instagram.svg" alt="Instagram" class="w-7 h-7 filter invert" />
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-sm">Instagram</h3>
+          <p class="text-xs text-slate-400">@cabeto.art</p>
+        </div>
+      </a>
+
+      <a 
+        href="https://www.linkedin.com/in/carlos-alberto-de-la-pe%C3%B1a-j%C3%A1come-0bba3526a/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="group p-5 bg-slate-900/80 border border-slate-800 hover:border-sky-500/50 rounded-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(14,165,233,0.25)] flex flex-col items-center text-center gap-3"
+      >
+        <div class="p-3 bg-sky-500/10 rounded-xl text-sky-400 group-hover:scale-110 transition-transform">
+          <img src="/icons/linkedin.svg" alt="LinkedIn" class="w-7 h-7 filter invert" />
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-sm">LinkedIn</h3>
+          <p class="text-xs text-slate-400">Carlos de la Peña</p>
+        </div>
+      </a>
+
+      <a 
+        href="https://github.com/CabetoDLP" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="group p-5 bg-slate-900/80 border border-slate-800 hover:border-purple-500/50 rounded-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)] flex flex-col items-center text-center gap-3"
+      >
+        <div class="p-3 bg-purple-500/10 rounded-xl text-purple-400 group-hover:scale-110 transition-transform">
+          <img src="/icons/github.svg" alt="GitHub" class="w-7 h-7 filter invert" />
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-sm">GitHub</h3>
+          <p class="text-xs text-slate-400">CabetoDLP</p>
+        </div>
+      </a>
+
+      <a 
+        href="https://api.whatsapp.com/send/?phone=573052927115" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="group p-5 bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 rounded-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(16,185,129,0.25)] flex flex-col items-center text-center gap-3"
+      >
+        <div class="p-3 bg-emerald-500/10 rounded-xl text-emerald-400 group-hover:scale-110 transition-transform">
+          <img src="/icons/whatsapp.svg" alt="WhatsApp" class="w-7 h-7 filter invert" />
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-sm">WhatsApp</h3>
+          <p class="text-xs text-slate-400">{t.contactWhatsappLabel}</p>
+        </div>
+      </a>
+
+      <a 
+        href="https://discord.com/users/252258312978956290" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="group p-5 bg-slate-900/80 border border-slate-800 hover:border-[#505FF7]/50 rounded-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(80,95,247,0.3)] flex flex-col items-center text-center gap-3"
+      >
+        <div class="p-3 bg-[#505FF7]/20 rounded-xl text-[#505FF7] group-hover:scale-110 transition-transform">
+          <img src="/icons/discord.svg" alt="Discord" class="w-7 h-7 filter invert" />
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-sm">Discord</h3>
+          <p class="text-xs text-slate-400">@cabeto.art</p>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="lg:col-span-7">
+      <form class="space-y-5 bg-slate-900/80 p-8 border border-red-500/30 rounded-2xl backdrop-blur-xl shadow-[0_0_50px_rgba(220,38,38,0.1)]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-xs font-mono text-slate-400 mb-2 uppercase">{t.formName}</label>
+            <input 
+              type="text" 
+              placeholder={t.formNamePlaceholder} 
+              class="w-full bg-slate-950/80 border border-slate-800 focus:border-red-500 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none transition-colors" 
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-mono text-slate-400 mb-2 uppercase">{t.formEmail}</label>
+            <input 
+              type="email" 
+              placeholder={t.formEmailPlaceholder} 
+              class="w-full bg-slate-950/80 border border-slate-800 focus:border-red-500 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none transition-colors" 
+              required
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono text-slate-400 mb-2 uppercase">{t.formMessage}</label>
+          <textarea 
+            rows="4" 
+            placeholder={t.formMessagePlaceholder} 
+            class="w-full bg-slate-950/80 border border-slate-800 focus:border-red-500 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none transition-colors"
+            required
+          ></textarea>
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full py-4 rounded-xl font-bold text-xs sm:text-sm tracking-wider uppercase bg-red-600 text-white shadow-[0_0_25px_rgba(220,38,38,0.4)] hover:bg-red-500 hover:shadow-[0_0_35px_rgba(220,38,38,0.6)] transition-all duration-300"
+        >
+          {t.sendButton}
+        </button>
+      </form>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,201 @@
+---
+import { languages, ui } from '../language/ui';
+
+interface Props {
+  lang?: keyof typeof languages | keyof typeof ui;
+}
+
+const { lang = 'spanish' } = Astro.props;
+const currentLang = (lang === 'es' ? 'spanish' : lang === 'en' ? 'english' : lang) as 'spanish' | 'english';
+const t = ui[currentLang] || ui.spanish;
+
+const experiences = currentLang === 'english' ? [
+  {
+    role: 'Full Stack Developer & Digital Illustrator',
+    company: 'Freelance / Independent',
+    period: '2024 - Present',
+    status: 'Current',
+    description:
+      'Designing and engineering custom software solutions and scalable web platforms. Creator of a Full Stack Marketplace platform featuring real-time client-server communication.',
+    achievements: [
+      'Built RESTful APIs with Node.js, Express, and PostgreSQL implementing JWT security.',
+      'Integrated WebSockets (Socket.IO) for real-time messaging and Cloudinary for media asset management.',
+      'Managed continuous deployment pipelines on Vercel (Frontend) and Render (Backend/Database).',
+      'Executed digital art commissions for international clients.'
+    ],
+    techs: ['React', 'Node.js', 'PostgreSQL', 'Socket.IO', 'Cloudinary', 'Vercel', 'Render'],
+    color: '#EF4444'
+  },
+  {
+    role: 'Full Stack Developer',
+    company: 'Constructora Rocaire S.A.S.',
+    period: '2024',
+    status: 'Completed',
+    description:
+      'Led the technical renewal of the corporate digital presence, optimizing web performance and search engine ranking.',
+    achievements: [
+      'Developed responsive corporate website using Next.js and Tailwind CSS.',
+      'Implemented advanced technical SEO, Schema.org structured data schemas, and Google Rich Results support.',
+      'Increased web visibility and search indexing for real estate projects.'
+    ],
+    techs: ['Next.js', 'React', 'Tailwind CSS', 'SEO', 'TypeScript'],
+    color: '#06B6D4'
+  },
+  {
+    role: 'Software Developer (Intern)',
+    company: 'SMITCO S.A.S. (Port of Santa Marta)',
+    period: '2024',
+    status: 'Completed',
+    description:
+      'Engineered critical business modules for port logistics operations and provider management in the internal platform.',
+    achievements: [
+      'Developed web modules for container inspection auditing and cargo logistics.',
+      'Implemented secure authentication flows and business logic using Clean Architecture principles.',
+      'Optimized relational database queries (SQL Server / PostgreSQL) reducing response times.'
+    ],
+    techs: ['ASP.NET Core', '.NET', 'C#', 'SQL Server', 'PostgreSQL', 'JavaScript'],
+    color: '#8B5CF6'
+  }
+] : [
+  {
+    role: 'Desarrollador Full Stack & Ilustrador Digital',
+    company: 'Freelance / Independiente',
+    period: '2024 - Presente',
+    status: 'Actual',
+    description:
+      'Diseño y desarrollo soluciones software a medida y plataformas web escalables. Creador de la plataforma Marketplace Full Stack con comunicación en tiempo real y arquitectura cliente-servidor.',
+    achievements: [
+      'Desarrollo de APIs RESTful con Node.js, Express y PostgreSQL, implementando seguridad JWT.',
+      'Integración de WebSocket (Socket.IO) para chat/mensajería en tiempo real y Cloudinary para gestión multimedia.',
+      'Gestión de despliegues continuos en Vercel (Frontend) y Render (Backend/Base de Datos).',
+      'Atención y ejecución de comisiones de arte digital interactuando con clientes internacionales.'
+    ],
+    techs: ['React', 'Node.js', 'PostgreSQL', 'Socket.IO', 'Cloudinary', 'Vercel', 'Render'],
+    color: '#EF4444'
+  },
+  {
+    role: 'Desarrollador Full Stack',
+    company: 'Constructora Rocaire S.A.S.',
+    period: '2024',
+    status: 'Completado',
+    description:
+      'Lideré la renovación técnica de la presencia digital corporativa de la constructora, optimizando el rendimiento web y el posicionamiento en motores de búsqueda.',
+    achievements: [
+      'Desarrollé el sitio web corporativo responsive utilizando Next.js y Tailwind CSS.',
+      'Implementé SEO técnico avanzado, esquemas de datos estructurados (Schema.org) y soporte para Google Rich Results.',
+      'Incrementé la visibilidad web e indexación de proyectos inmobiliarios de la empresa.'
+    ],
+    techs: ['Next.js', 'React', 'Tailwind CSS', 'SEO', 'TypeScript'],
+    color: '#06B6D4'
+  },
+  {
+    role: 'Desarrollador de Software (Pasante)',
+    company: 'SMITCO S.A.S. (Puerto de Santa Marta)',
+    period: '2024',
+    status: 'Completado',
+    description:
+      'Construcción de módulos empresariales críticos para la operación logística portuaria y gestión de proveedores dentro de la plataforma interna.',
+    achievements: [
+      'Desarrollé módulos web para auditoría e inspección de contenedores y logística de carga.',
+      'Implementé flujos de autenticación segura y lógica de negocio bajo principios de Arquitectura Limpia.',
+      'Optimicé consultas en bases de datos relacionales (SQL Server / PostgreSQL) reduciendo tiempos de respuesta.'
+    ],
+    techs: ['ASP.NET Core', '.NET', 'C#', 'SQL Server', 'PostgreSQL', 'JavaScript'],
+    color: '#8B5CF6'
+  }
+];
+---
+
+<section id="experience" class="relative py-20 px-4 sm:px-6 max-w-6xl mx-auto overflow-hidden">
+  <div class="mb-16 text-center md:text-left">
+    <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white flex items-center justify-center md:justify-start gap-3">
+      <span class="text-red-500">//</span> {t.experienceTitle}
+    </h2>
+    <p class="text-slate-400 text-base max-w-2xl mt-2 leading-relaxed">
+      {t.experienceText}
+    </p>
+  </div>
+
+  <div class="relative border-l-2 border-slate-800/80 ml-3 sm:ml-6 pl-6 sm:pl-10 space-y-12">
+    {experiences.map((exp) => (
+      <div class="relative group perspective-container">
+        <div 
+          class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full border-4 border-slate-950 transition-all duration-300 group-hover:scale-125"
+          style={`background-color: ${exp.color}; box-shadow: 0 0 12px ${exp.color};`}
+        ></div>
+
+        <div 
+          class="card-3d relative p-6 sm:p-8 rounded-2xl bg-slate-950/80 border backdrop-blur-xl transition-all duration-500 transform-gpu"
+          style={`
+            border-color: ${exp.color}40;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.8), 0 0 20px ${exp.color}15;
+          `}
+        >
+          <div 
+            class="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl pointer-events-none"
+            style={`background: ${exp.color};`}
+          ></div>
+
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <div>
+              <span 
+                class="inline-block text-[11px] font-mono font-semibold tracking-wider uppercase px-3 py-1 rounded-full border mb-2"
+                style={`color: ${exp.color}; background-color: ${exp.color}15; border-color: ${exp.color}40;`}
+              >
+                {exp.period} • {exp.status}
+              </span>
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all">
+                {exp.role}
+              </h3>
+              <p class="text-sm font-semibold text-slate-400 mt-0.5">
+                {exp.company}
+              </p>
+            </div>
+          </div>
+
+          <p class="text-slate-300 text-sm leading-relaxed mb-4">
+            {exp.description}
+          </p>
+
+          <ul class="space-y-2 mb-6">
+            {exp.achievements.map((item) => (
+              <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-400 leading-relaxed">
+                <span class="text-red-500 mt-1">▸</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-800/60">
+            {exp.techs.map((tech) => (
+              <span class="text-[11px] font-mono text-slate-300 bg-slate-900/90 border border-slate-800 px-2.5 py-1 rounded-md">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .perspective-container {
+    perspective: 1000px;
+  }
+
+  .card-3d {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .perspective-container:hover .card-3d {
+    transform: rotateX(4deg) rotateY(-2deg) translateZ(15px);
+  }
+
+  @media (max-width: 640px) {
+    .perspective-container:hover .card-3d {
+      transform: translateY(-4px);
+    }
+  }
+</style>
