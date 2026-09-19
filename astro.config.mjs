@@ -5,11 +5,14 @@ import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
 
+import node from '@astrojs/node';
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
+
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
@@ -17,6 +20,13 @@ export default defineConfig({
       prefixDefaultLocale: false // 'es' no lleva prefijo (/proyectos), 'en' sí (/en/proyectos)
     }
   },
-  site: 'https://cabetodev.onrender.com', // Ajusta este dominio por la URL final de tu portafolio de desarrollo
+
+  // Ajusta este dominio por la URL final de tu portafolio de desarrollo
+  site: 'https://cabetodev.onrender.com',
+
   integrations: [sitemap()],
+
+  adapter: node({
+    mode: 'standalone',
+  }),
 });
