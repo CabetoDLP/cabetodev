@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
+import Skills from '../../components/Skills.astro';
+import Experience from '../../components/Experience.astro';
+import Studies from '../../components/Studies.astro';
+import Projects from '../../components/Projects.astro';
+import Files from '../../components/Files.astro';
+import Contact from '../../components/Contact.astro';
+
+const lang = 'spanish';
+---
+
+<Layout 
+  title="Carlos de la Peña | Ingeniero de Sistemas & Desarrollador Full Stack" 
+  description="Portafolio oficial de Carlos Alberto de la Peña Jácome. Ingeniero de Sistemas y Desarrollador Full Stack." 
+  lang={lang}
+>
+  <Navbar lang={lang} />
+  <main class="pt-16">
+    <Hero lang={lang} />
+    <Skills lang={lang} />
+    <Experience lang={lang} />
+    <Studies lang={lang} />
+    <Projects lang={lang} />
+    <Contact lang={lang} />
+    <Files lang={lang} />
+  </main>
+</Layout>

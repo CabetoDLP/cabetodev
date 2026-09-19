@@ -1,37 +1,22 @@
 ---
-export const prerender = false;
-
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
-import Skills from '../components/Skills.astro';
-import Experience from '../components/Experience.astro';
-import Studies from '../components/Studies.astro';
-import Projects from '../components/Projects.astro';
-import Files from '../components/Files.astro';
-import Contact from '../components/Contact.astro';
-
-const paramLang = Astro.url.searchParams.get('lang');
-const lang = (paramLang === 'en' || paramLang === 'english') ? 'english' : 'spanish';
-
-const pageTitle = lang === 'english' 
-  ? 'Carlos de la Peña | Full Stack Engineer & Portfolio' 
-  : 'Carlos de la Peña | Ingeniero de Sistemas & Desarrollador Full Stack';
-
-const pageDescription = lang === 'english'
-  ? 'Official portfolio of Carlos Alberto de la Peña Jácome. Full Stack Software Engineer focused on web applications, modern architectures, and web development.'
-  : 'Portafolio oficial de Carlos Alberto de la Peña Jácome. Ingeniero de Sistemas y Desarrollador Full Stack enfocado en aplicaciones web y arquitectura de software.';
+// src/pages/index.astro
 ---
 
-<Layout title={pageTitle} description={pageDescription} lang={lang}>
-  <Navbar lang={lang} />
-  <main class="pt-16">
-    <Hero lang={lang} />
-    <Skills lang={lang} />
-    <Experience lang={lang} />
-    <Studies lang={lang} />
-    <Projects lang={lang} />
-    <Contact lang={lang} />
-    <Files lang={lang} />
-  </main>
-</Layout>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carlos de la Peña | Portfolio</title>
+    <script is:inline>
+      // Detecta el idioma preferido del navegador y redirige a la subcarpeta correspondiente
+      const userLang = navigator.language || navigator.userLanguage || '';
+      const targetLang = userLang.toLowerCase().startsWith('en') ? 'en' : 'es';
+      
+      window.location.replace(`/${targetLang}/`);
+    </script>
+  </head>
+  <body class="bg-slate-950 text-white flex items-center justify-center min-h-screen">
+    <p class="font-mono text-xs text-slate-400 animate-pulse">// Redirigiendo...</p>
+  </body>
+</html>

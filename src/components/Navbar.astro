@@ -1,4 +1,5 @@
 ---
+// src/components/Navbar.astro
 import { languages, ui } from '../language/ui';
 
 interface Props {
@@ -13,7 +14,7 @@ const t = ui[currentLang] || ui.spanish;
 <header class="fixed top-0 left-0 w-full z-50 px-6 py-4 backdrop-blur-md bg-slate-950/70 border-b border-red-500/20">
   <div class="max-w-6xl mx-auto flex items-center justify-between">
     
-    <a href="#" class="flex items-center gap-2.5 font-mono text-lg font-bold tracking-wider text-white hover:text-red-400 transition-colors group">
+    <a href={currentLang === 'english' ? '/en/' : '/es/'} class="flex items-center gap-2.5 font-mono text-lg font-bold tracking-wider text-white hover:text-red-400 transition-colors group">
       <img 
         src="/favicon-512x512.png" 
         alt="CabetoDev Logo" 
@@ -37,15 +38,13 @@ const t = ui[currentLang] || ui.spanish;
     <div class="flex items-center gap-4">
       <div class="flex items-center bg-slate-900 border border-red-500/30 rounded-lg p-1 text-xs font-mono">
         <a 
-          href="?lang=spanish" 
-          data-astro-reload
+          href="/es/" 
           class={`px-2 py-1 rounded transition-all ${currentLang === 'spanish' ? 'bg-red-600 text-white font-bold' : 'text-slate-400 hover:text-white'}`}
         >
           ES
         </a>
         <a 
-          href="?lang=english" 
-          data-astro-reload
+          href="/en/" 
           class={`px-2 py-1 rounded transition-all ${currentLang === 'english' ? 'bg-red-600 text-white font-bold' : 'text-slate-400 hover:text-white'}`}
         >
           EN
