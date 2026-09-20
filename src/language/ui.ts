@@ -19,10 +19,10 @@ const uiBase = {
     aFilesText: 'Anexos',
 
     // Hero Section
-    heroBadge: 'Full Stack Engineer & Digital Artist',
+    heroBadge: 'Desarrollador y Artista Digital',
     heroFirstName: 'Carlos',
     heroLastName: 'de la Peña',
-    heroRole: 'Full Stack Developer',
+    heroRole: 'Full Stack Engineer',
     descriptionText: 'Ingeniero de sistemas enfocado en el desarrollo de soluciones web escalables y experiencias digitales. Con sólida experiencia técnica tanto en el desarrollo Front-end como Back-end, disponible para colaborar en equipos de alto rendimiento o proyectos independientes.',
     heroStatusLabel: 'ESTADO',
     heroStatusValue: 'Disponible para Proyectos',
@@ -88,10 +88,10 @@ const uiBase = {
     aFilesText: 'Files',
 
     // Hero Section
-    heroBadge: 'Full Stack Engineer & Digital Artist',
+    heroBadge: 'Developer & Digital Artist',
     heroFirstName: 'Carlos',
     heroLastName: 'de la Peña',
-    heroRole: 'Full Stack Developer',
+    heroRole: 'Full Stack Engineer',
     descriptionText: 'Systems engineer focused on developing scalable web solutions and high-impact digital experiences. Possessing strong technical experience in both Front-end and Back-end development, open to teamwork or freelance web projects.',
     heroStatusLabel: 'STATUS',
     heroStatusValue: 'Available for Projects',
