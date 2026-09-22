@@ -54,6 +54,33 @@ const uiBase = {
     modalLiveDemo: 'Ver Proyecto Live',
     modalGithubRepo: 'GitHub Repository',
 
+    servicesTitle: 'SERVICIOS WEB',
+    servicesSubtitle: 'Soluciones de desarrollo web a medida, diseñadas para transformar ideas en plataformas escalables, rápidas y optimizadas para negocios.',
+
+    // Servicio 1
+    service1Title: 'Desarrollo Web Apps & SaaS',
+    service1Desc: 'Plataformas web complejas, paneles administrativos y sistemas de gestión a medida con lógica de negocio avanzada y alta escalabilidad.',
+    service1Feature1: 'Arquitectura limpia y código mantenible',
+    service1Feature2: 'Modelado e integración de bases de datos',
+    service1Feature3: 'Autenticación segura y roles de usuario',
+    service1Feature4: 'Integración de APIs y servicios de terceros',
+
+    // Servicio 2
+    service2Title: 'Sitios Web & Landing Pages',
+    service2Desc: 'Sitios corporativos y portafolios ultrarrápidos, optimizados para conversión, retención de usuarios y posicionamiento orgánico en motores de búsqueda.',
+    service2Feature1: 'Carga instantánea con renderizado estático',
+    service2Feature2: 'SEO técnico y metadatos Open Graph',
+    service2Feature3: 'Diseño 100% responsivo y adaptable',
+    service2Feature4: 'Animaciones fluidas e interfaz moderna',
+
+    // Servicio 3
+    service3Title: 'Modernización & Refactoring Web',
+    service3Desc: 'Transformación de plataformas lentas o desactualizadas en software moderno, eficiente y fácil de mantener.',
+    service3Feature1: 'Auditoría y optimización de rendimiento',
+    service3Feature2: 'Migración a stacks modernos de JS/TS',
+    service3Feature3: 'Mejora en puntajes de Google Lighthouse',
+    service3Feature4: 'Corrección de responsive y accesibilidad',
+
     // Files / HV
     filesBadge: '// Credenciales & Trayectoria',
     filesTitle: '¿Quieres evaluar mi perfil completo?',
@@ -122,6 +149,33 @@ const uiBase = {
     modalStackUsed: '// Tech Stack Used',
     modalLiveDemo: 'View Live Project',
     modalGithubRepo: 'GitHub Repository',
+
+    servicesTitle: 'WEB SERVICES',
+    servicesSubtitle: 'Tailored web development solutions designed to turn ideas into scalable, fast, and business-optimized platforms.',
+
+    // Service 1
+    service1Title: 'Web Apps & SaaS Development',
+    service1Desc: 'Complex web platforms, admin dashboards, and custom management systems with advanced business logic and high scalability.',
+    service1Feature1: 'Clean architecture and maintainable code',
+    service1Feature2: 'Database modeling and integration',
+    service1Feature3: 'Secure authentication and user roles',
+    service1Feature4: 'API and third-party service integration',
+
+    // Service 2
+    service2Title: 'Websites & Landing Pages',
+    service2Desc: 'Ultra-fast corporate websites and portfolios optimized for conversion, user retention, and search engine organic ranking.',
+    service2Feature1: 'Instant load with static rendering',
+    service2Feature2: 'Technical SEO & Open Graph metadata',
+    service2Feature3: '100% responsive and adaptive design',
+    service2Feature4: 'Smooth animations & modern UI',
+
+    // Service 3
+    service3Title: 'Web Modernization & Refactoring',
+    service3Desc: 'Transforming slow or legacy platforms into modern, efficient, and easily maintainable software.',
+    service3Feature1: 'Performance auditing and optimization',
+    service3Feature2: 'Migration to modern JS/TS stacks',
+    service3Feature3: 'Google Lighthouse score improvement',
+    service3Feature4: 'Responsive and accessibility fixes',
 
     // Files / CV
     filesBadge: '// Credentials & Track Record',
