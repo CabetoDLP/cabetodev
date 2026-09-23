@@ -15,6 +15,7 @@ const uiBase = {
     aExperienceText: 'Experiencia',
     aStudiesText: 'Formación',
     aProjectsText: 'Proyectos',
+    aServicesText: 'Servicios',
     aContactText: 'Contacto',
     aFilesText: 'Anexos',
 
@@ -111,6 +112,7 @@ const uiBase = {
     aExperienceText: 'Experience',
     aStudiesText: 'Education',
     aProjectsText: 'Projects',
+    aServicesText: 'Services',
     aContactText: 'Contact',
     aFilesText: 'Files',
 
