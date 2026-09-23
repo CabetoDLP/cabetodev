@@ -82,13 +82,6 @@ const uiBase = {
     service3Feature3: 'Mejora en puntajes de Google Lighthouse',
     service3Feature4: 'Corrección de responsive y accesibilidad',
 
-    // Files / HV
-    filesBadge: '// Credenciales & Trayectoria',
-    filesTitle: '¿Quieres evaluar mi perfil completo?',
-    filesDescription: 'Descarga mi curriculum vitae para revisar a detalle mi experiencia técnica, stack tecnológico y formación profesional.',
-    downloadCvButton: 'Descargar CV',
-    curriculumPath: '/CarlosDeLaPeña_HV.pdf',
-
     // Contact
     contactTitle: '¿Te llamó la atención?',
     contactSubtitle: 'Cuéntame sobre tu proyecto o solicita una consulta. Estoy listo para convertir tus ideas en software de alto impacto.',
@@ -101,6 +94,16 @@ const uiBase = {
     sendButton: 'Enviar Consulta',
     sendMessage: 'Mensaje enviado exitosamente',
     sendErrorMessage: 'Ocurrió un error al enviar tu mensaje, por favor inténtalo nuevamente',
+    modalSuccessTitle: '// ¡Mensaje Enviado!',
+    modalErrorTitle: '// Error al Enviar',
+    modalConfirmBtn: 'Aceptar',
+
+    // Files / HV
+    filesBadge: '// Credenciales & Trayectoria',
+    filesTitle: '¿Quieres evaluar mi perfil completo?',
+    filesDescription: 'Descarga mi curriculum vitae para revisar a detalle mi experiencia técnica, stack tecnológico y formación profesional.',
+    downloadCvButton: 'Descargar CV',
+    curriculumPath: '/CarlosDeLaPeña_HV.pdf',
 
     // Redes rápidas
     contactWhatsappLabel: 'Chat Directo'
@@ -179,13 +182,6 @@ const uiBase = {
     service3Feature3: 'Google Lighthouse score improvement',
     service3Feature4: 'Responsive and accessibility fixes',
 
-    // Files / CV
-    filesBadge: '// Credentials & Track Record',
-    filesTitle: 'Want to review my full profile?',
-    filesDescription: 'Download my resume to review my technical experience, technology stack, and academic background in detail.',
-    downloadCvButton: 'Download CV',
-    curriculumPath: '/CarlosDeLaPeña_CV.pdf',
-
     // Contact
     contactTitle: 'Interested in working together?',
     contactSubtitle: 'Tell me about your project or request a consultation. I am ready to turn your ideas into high-impact software.',
@@ -198,6 +194,16 @@ const uiBase = {
     sendButton: 'Send Message',
     sendMessage: 'Message sent successfully',
     sendErrorMessage: 'An error occurred while sending your message, please try again',
+    modalSuccessTitle: '// Message Sent!',
+    modalErrorTitle: '// Error Sending',
+    modalConfirmBtn: 'OK',
+
+    // Files / CV
+    filesBadge: '// Credentials & Track Record',
+    filesTitle: 'Want to review my full profile?',
+    filesDescription: 'Download my resume to review my technical experience, technology stack, and academic background in detail.',
+    downloadCvButton: 'Download CV',
+    curriculumPath: '/CarlosDeLaPeña_CV.pdf',
 
     // Quick Socials
     contactWhatsappLabel: 'Direct Chat'

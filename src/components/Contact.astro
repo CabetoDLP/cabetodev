@@ -110,6 +110,9 @@ const t = ui[currentLang] || ui.spanish;
         class="contact-form space-y-5 bg-slate-900/80 p-8 border border-red-500/30 rounded-2xl backdrop-blur-xl shadow-[0_0_50px_rgba(220,38,38,0.1)]"
         data-send-message={t.sendMessage}
         data-error-message={t.sendErrorMessage}
+        data-success-title={t.modalSuccessTitle}
+        data-error-title={t.modalErrorTitle}
+        data-confirm-btn={t.modalConfirmBtn}
       >
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
@@ -184,14 +187,18 @@ const t = ui[currentLang] || ui.spanish;
   const modalContent = document.getElementById('contact-modal-content');
 
   const openContactModal = (isSuccess, text) => {
-    if (!modalContent || !modal) return;
+    if (!modalContent || !modal || !form) return;
+
+    const titleSuccess = form.getAttribute('data-success-title') || '// ¡Mensaje Enviado!';
+    const titleError = form.getAttribute('data-error-title') || '// Error al Enviar';
+    const btnText = form.getAttribute('data-confirm-btn') || 'Aceptar';
 
     modalContent.innerHTML = `
       <div class="mx-auto w-12 h-12 rounded-full ${isSuccess ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' : 'bg-red-500/10 text-red-400 border border-red-500/30'} flex items-center justify-center text-xl font-bold">
         ${isSuccess ? '✓' : '✕'}
       </div>
       <h3 class="text-xl font-black uppercase text-white tracking-wide">
-        ${isSuccess ? '// ¡Mensaje Enviado!' : '// Error al Enviar'}
+        ${isSuccess ? titleSuccess : titleError}
       </h3>
       <p class="text-slate-300 text-sm leading-relaxed">
         ${text}
@@ -200,7 +207,7 @@ const t = ui[currentLang] || ui.spanish;
         id="modal-confirm-btn" 
         class="w-full mt-4 py-3 rounded-xl font-bold text-xs uppercase tracking-wider ${isSuccess ? 'bg-emerald-600 hover:bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3)]' : 'bg-red-600 hover:bg-red-500 shadow-[0_0_20px_rgba(220,38,38,0.4)]'} text-white transition-all"
       >
-        Aceptar
+        ${btnText}
       </button>
     `;
 
