@@ -13,7 +13,7 @@ const {
   lang = 'spanish' 
 } = Astro.props;
 
-const siteUrl = 'https://cabetodev.onrender.com'; // Dominio de cabeto dev
+const siteUrl = 'https://cabetodev.onrender.com';
 const currentLang = (lang === 'en' || lang === 'english') ? 'en' : 'es';
 
 // Schema JSON-LD de Persona / Desarrollador para motores de búsqueda
@@ -103,7 +103,9 @@ const jsonLdWebSite = {
     <div class="relative z-10">
       <slot />
     </div>
-    <Chatbot/>
+
+    <!-- Pasa la prop lang al Chatbot -->
+    <Chatbot lang={lang} />
   </body>
 </html>
 

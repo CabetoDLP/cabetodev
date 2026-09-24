@@ -106,7 +106,15 @@ const uiBase = {
     curriculumPath: '/CarlosDeLaPeña_HV.pdf',
 
     // Redes rápidas
-    contactWhatsappLabel: 'Chat Directo'
+    contactWhatsappLabel: 'Chat Directo',
+
+    botInitialMessage: "👋 ¡Hola! Soy el asistente virtual de Carlos. ¿Tienes preguntas sobre sus proyectos, habilidades o experiencia?",
+    botPlaceholder: "Escribe un mensaje...",
+    botSendText: "Enviar",
+    botTyping: "Escribiendo...",
+    botError: "Ocurrió un error al conectar con el asistente. Inténtalo nuevamente.",
+    botAriaOpen: "Abrir Asistente AI",
+    botAriaClose: "Cerrar chat"
   },
   english: {
     // Navigation
@@ -204,6 +212,14 @@ const uiBase = {
     filesDescription: 'Download my resume to review my technical experience, technology stack, and academic background in detail.',
     downloadCvButton: 'Download CV',
     curriculumPath: '/CarlosDeLaPeña_CV.pdf',
+
+    botInitialMessage: "👋 Hi! I'm Carlos's virtual assistant. Do you have any questions about his projects, skills or experience?",
+    botPlaceholder: "Write a message...",
+    botSendText: "Send",
+    botTyping: "Typing...",
+    botError: "An error occurred while connecting to the assistant. Please try again.",
+    botAriaOpen: "Open AI Assistant",
+    botAriaClose: "Close chat",
 
     // Quick Socials
     contactWhatsappLabel: 'Direct Chat'
