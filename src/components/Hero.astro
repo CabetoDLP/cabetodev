@@ -13,6 +13,7 @@ const t = ui[currentLang] || ui.spanish;
 <section id="presentation" class="relative flex items-center justify-center px-6 pt-28 pb-12 sm:pt-32 sm:pb-16 max-w-6xl mx-auto">
   <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
     
+    <!-- Columna Izquierda: Información de Presentación -->
     <div class="flex flex-col items-start gap-5">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/60 border border-red-500/40 text-red-400 text-xs font-mono tracking-widest uppercase shadow-[0_0_15px_rgba(239,68,68,0.2)]">
         <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
@@ -50,29 +51,65 @@ const t = ui[currentLang] || ui.spanish;
       </div>
     </div>
 
+    <!-- Columna Derecha: Tarjeta de Perfil -->
     <div class="relative flex justify-center items-center">
-      <div class="absolute inset-0 bg-gradient-to-tr from-red-600 to-purple-600 rounded-[2.5rem] blur-2xl opacity-50 animate-pulse"></div>
+      <!-- Glow ambiental de fondo -->
+      <div class="absolute inset-0 bg-gradient-to-tr from-red-600 via-rose-500 to-purple-600 rounded-[2.5rem] blur-2xl opacity-50 animate-pulse"></div>
 
       <div class="relative p-2 bg-slate-900/90 border border-red-500/50 rounded-[2.5rem] backdrop-blur-xl shadow-[0_0_40px_rgba(220,38,38,0.25)] max-w-sm sm:max-w-md w-full">
         <div class="relative rounded-[2rem] overflow-hidden bg-slate-950 aspect-[4/4.5] flex items-center justify-center border border-red-500/20">
+          
+          <!-- Capa 1 (Fondo): SVG tech ampliado con iluminación rosado neón -->
+          <div class="absolute inset-0 flex items-center justify-center p-2 pointer-events-none z-0">
+            <img 
+              src="/icons/tech.svg" 
+              alt="Tech Icon Background" 
+              class="w-full h-full object-contain tech-glow-rose opacity-95"
+            />
+          </div>
+
+          <!-- Capa 2 (Superpuesta): Imagen de perfil a color estática -->
           <img
-            src="https://res.cloudinary.com/dzipy5bme/image/upload/f_auto,q_auto/v1/Porfolio/Images/cabetoDev"
+            src="/profile/cabeto.webp"
             alt="Carlos de la Peña"
-            class="w-full h-full object-cover mix-blend-luminosity hover:mix-blend-normal hover:scale-105 transition-all duration-700"
+            class="relative z-10 w-full h-full object-cover"
           />
           
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+          <!-- Capa 3: Sombra de degradado inferior -->
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-15 pointer-events-none"></div>
           
-          <div class="absolute bottom-5 left-5 right-5 p-3.5 rounded-xl bg-slate-900/80 border border-red-500/30 backdrop-blur-md flex items-center justify-between">
+          <!-- Capa 4: Badge de estado -->
+          <div class="absolute bottom-5 left-5 right-5 p-3.5 rounded-xl bg-slate-900/80 border border-red-500/30 backdrop-blur-md flex items-center justify-between z-20">
             <div>
               <p class="text-[10px] font-mono text-red-400">{t.heroStatusLabel}</p>
               <p class="text-xs sm:text-sm font-bold text-white">{t.heroStatusValue}</p>
             </div>
             <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]"></div>
           </div>
+
         </div>
       </div>
     </div>
 
   </div>
 </section>
+
+<style>
+  /* Resplandor neón rosado con máxima intensidad en la palpitación */
+  @keyframes roseTechPulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 15px rgba(244, 63, 94, 0.85)) 
+              drop-shadow(0 0 30px rgba(225, 29, 72, 0.65));
+      transform: scale(1);
+    }
+    50% {
+      filter: drop-shadow(0 0 28px rgba(244, 63, 94, 1)) 
+              drop-shadow(0 0 50px rgba(225, 29, 72, 0.9));
+      transform: scale(1.03);
+    }
+  }
+
+  .tech-glow-rose {
+    animation: roseTechPulse 3s ease-in-out infinite;
+  }
+</style>
