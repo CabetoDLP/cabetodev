@@ -7,6 +7,8 @@ interface Props {
   lang?: 'spanish' | 'english' | 'es' | 'en';
 }
 
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+
 const { 
   title = 'Carlos de la Peña | Full Stack Engineer & Software Developer', 
   description = 'Portafolio profesional de Carlos Alberto de la Peña Jácome. Ingeniero de Sistemas y Desarrollador Full Stack especializado en React, Next.js, Node.js y C#.',
@@ -91,6 +93,20 @@ const jsonLdWebSite = {
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLdPerson)} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLdWebSite)} />
+
+    {/* Google Analytics GA4 */}
+    {gaId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ dataLayer.push(arguments); }
+          gtag('js', new Date());
+
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
   </head>
   
   <body class="bg-slate-950 text-white font-sans min-h-screen relative overflow-x-hidden selection:bg-red-500 selection:text-white">
