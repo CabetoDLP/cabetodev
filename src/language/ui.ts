@@ -147,7 +147,7 @@ const uiBase = {
     modalConfirmBtn: 'Aceptar',
 
     // Files / HV
-    filesBadge: '// Credenciales & Trayectoria',
+    filesBadge: 'Credenciales & Trayectoria',
     filesTitle: '¿Quieres evaluar mi perfil completo?',
     filesDescription: 'Descarga mi curriculum vitae para revisar a detalle mi experiencia técnica, stack tecnológico y formación profesional.',
     downloadCvButton: 'Descargar CV',
@@ -298,7 +298,7 @@ const uiBase = {
     modalConfirmBtn: 'OK',
 
     // Files / CV
-    filesBadge: '// Credentials & Track Record',
+    filesBadge: 'Credentials & Track Record',
     filesTitle: 'Want to review my full profile?',
     filesDescription: 'Download my resume to review my technical experience, technology stack, and academic background in detail.',
     downloadCvButton: 'Download CV',
