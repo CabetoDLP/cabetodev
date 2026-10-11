@@ -15,7 +15,7 @@ const {
   lang = 'spanish' 
 } = Astro.props;
 
-const siteUrl = 'https://cabetodev.onrender.com';
+const siteUrl = 'https://cabeto.dev';
 const currentLang = (lang === 'en' || lang === 'english') ? 'en' : 'es';
 
 // Schema JSON-LD de Persona / Desarrollador para motores de búsqueda
@@ -33,7 +33,8 @@ const jsonLdPerson = {
   sameAs: [
     'https://github.com/CarlosDeLaPena',
     'https://github.com/CabetoDLP',
-    'https://www.linkedin.com/in/carlosdelapenaj'
+    'https://www.linkedin.com/in/carlos-alberto-de-la-pe%C3%B1a-j%C3%A1come-0bba3526a/',
+    'https://www.instagram.com/cabetodp/'
   ]
 };
 
@@ -56,7 +57,7 @@ const jsonLdWebSite = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Carlos Alberto de la Peña Jácome" />
-    <meta name="keywords" content="Carlos de la Peña, CabetoDev, Full Stack Engineer, Software Developer, React, Next.js, Node.js, TypeScript, Astro, Systems Engineer, Portafolio" />
+    <meta name="keywords" content="Carlos de la Peña, CabetoDev, cabetodev, Developer, Web Developer,  Full Stack Engineer, Software Developer, React, Next.js, Node.js, TypeScript, Astro, Systems Engineer, Portafolio" />
     <link rel="canonical" href={siteUrl} />
     <meta name="robots" content="index, follow" />
 
