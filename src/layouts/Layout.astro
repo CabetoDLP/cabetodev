@@ -1,5 +1,6 @@
 ---
 import Chatbot from '../components/Chatbot.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 
 interface Props {
   title?: string;
@@ -121,8 +122,8 @@ const jsonLdWebSite = {
       <slot />
     </div>
 
-    <!-- Pasa la prop lang al Chatbot -->
     <Chatbot lang={lang} />
+    <WhatsAppButton lang={lang} />
   </body>
 </html>
 

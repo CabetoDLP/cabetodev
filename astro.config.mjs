@@ -11,7 +11,7 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  site: 'https://cabetodev.onrender.com',
+  site: 'https://cabeto.dev',
 
   integrations: [sitemap()],
 });

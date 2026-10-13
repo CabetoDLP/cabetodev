@@ -53,7 +53,7 @@ const uiBase = {
     modalKeyAspects: '// Aspectos Clave & Arquitectura',
     modalStackUsed: '// Stack Utilizado',
     modalLiveDemo: 'Ver Proyecto Live',
-    modalGithubRepo: 'GitHub Repository',
+    modalGithubRepo: 'Repositorio de Github',
 
     // Servicios
     servicesTitle: "Catálogo de Servicios & Tarifas",
@@ -111,6 +111,14 @@ const uiBase = {
     s4F2: "Autenticación segura (JWT, OAuth, gestión de sesiones y roles)",
     s4F3: "Dashboard administrativo interactivo con métricas en tiempo real",
     s4F4: "Integración de APIs de terceros, Sockets y suscripciones (Stripe Billing)",
+    whatsappCTA: "Solicitar Servicio",
+    s1WaMsg: "¡Hola Carlos! Me interesa solicitar el servicio de Landing Page de Alto Rendimiento. ¿Podríamos agendar una breve llamada o chatear al respecto?",
+    s2WaMsg: "¡Hola Carlos! Me interesa solicitar el servicio de Sitio Web Corporativo / Institucional. ¿Me darías más detalles?",
+    s3WaMsg: "¡Hola Carlos! Quisiera solicitar el servicio de Aplicaciones Web Personalizadas & SaaS. ¿Podemos revisar mi proyecto?",
+    s4WaMsg: "¡Hola Carlos! Me interesa el servicio de Desarrollo Marketplace / E-commerce Completo. ¿Cómo empezamos?",
+    r1WaMsg: "¡Hola Carlos! Quisiera contratar el plan de Mantenimiento Básico.",
+    r2WaMsg: "¡Hola Carlos! Me interesa el plan de Mantenimiento Estándar.",
+    r3WaMsg: "¡Hola Carlos! Me gustaría contratar el plan de Mantenimiento Avanzado.",
 
     // Retainers
     r1Name: "Micro Care",
@@ -210,6 +218,7 @@ const uiBase = {
     modalStackUsed: '// Tech Stack Used',
     modalLiveDemo: 'View Live Project',
     modalGithubRepo: 'GitHub Repository',
+    
 
     // Services
     servicesTitle: "Service Catalog & Pricing",
@@ -263,6 +272,14 @@ const uiBase = {
     s4F2: "Secure Auth (JWT, OAuth, session & role management)",
     s4F3: "Interactive admin dashboard with real-time metrics",
     s4F4: "Third-party APIs, Sockets, and recurring billing (Stripe Billing)",
+    whatsappCTA: "Request Service",
+    s1WaMsg: "Hi Carlos! I am interested in requesting the High-Performance Landing Page service. Could we discuss further details?",
+    s2WaMsg: "Hi Carlos! I would like to request information about the Corporate / Institutional Website service. Can we chat?",
+    s3WaMsg: "Hi Carlos! I am looking for Custom Web Apps & SaaS Development. Let's discuss my project!",
+    s4WaMsg: "Hi Carlos! I am interested in the Marketplace / Full E-commerce Development service. How can we get started?",
+    r1WaMsg: "Hi Carlos! I would like to subscribe to the Basic Retainer Plan.",
+    r2WaMsg: "Hi Carlos! I am interested in the Standard Retainer Plan.",
+    r3WaMsg: "Hi Carlos! I would like to sign up for the Advanced Retainer Plan.",
 
     r1Name: "Micro Care",
     r1Price: "$50 – $80 USD / mo",
