@@ -14,6 +14,7 @@ const phone = "573169209202";
 
 const services = [
   {
+    id: 'landing_page',
     icon: `<svg class="w-6 h-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`,
     title: t.s1Title,
     price: t.s1Price,
@@ -26,6 +27,7 @@ const services = [
     waMsg: t.s1WaMsg
   },
   {
+    id: 'corporate_web',
     icon: `<svg class="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>`,
     title: t.s2Title,
     price: t.s2Price,
@@ -38,6 +40,7 @@ const services = [
     waMsg: t.s2WaMsg
   },
   {
+    id: 'custom_saas',
     icon: `<svg class="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>`,
     title: t.s3Title,
     price: t.s3Price,
@@ -50,6 +53,7 @@ const services = [
     waMsg: t.s3WaMsg
   },
   {
+    id: 'ecommerce_marketplace',
     icon: `<svg class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M12 5l7 7-7 7" /></svg>`,
     title: t.s4Title,
     price: t.s4Price,
@@ -64,9 +68,9 @@ const services = [
 ];
 
 const retainers = [
-  { name: t.r1Name, price: t.r1Price, desc: t.r1Desc, service: t.r1Service, color: '#EF4444', waMsg: t.r1WaMsg },
-  { name: t.r2Name, price: t.r2Price, desc: t.r2Desc, service: t.r2Service, color: '#06B6D4', waMsg: t.r2WaMsg },
-  { name: t.r3Name, price: t.r3Price, desc: t.r3Desc, service: t.r3Service, color: '#10B981', waMsg: t.r3WaMsg }
+  { id: 'retainer_basic', name: t.r1Name, price: t.r1Price, desc: t.r1Desc, service: t.r1Service, color: '#EF4444', waMsg: t.r1WaMsg },
+  { id: 'retainer_standard', name: t.r2Name, price: t.r2Price, desc: t.r2Desc, service: t.r2Service, color: '#06B6D4', waMsg: t.r2WaMsg },
+  { id: 'retainer_advanced', name: t.r3Name, price: t.r3Price, desc: t.r3Desc, service: t.r3Service, color: '#10B981', waMsg: t.r3WaMsg }
 ];
 ---
 
@@ -162,6 +166,7 @@ const retainers = [
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onclick={`if(typeof gtag === 'function'){ gtag('event', 'click_whatsapp_service', { 'service_id': '${service.id}', 'service_title': '${service.title}', 'language': '${currentLang}' }); }`}
                 class="w-full py-3 px-4 rounded-xl font-bold text-xs uppercase text-center flex items-center justify-center gap-2 text-white bg-emerald-600 hover:bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all duration-300"
               >
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -212,6 +217,7 @@ const retainers = [
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onclick={`if(typeof gtag === 'function'){ gtag('event', 'click_whatsapp_retainer', { 'plan_id': '${plan.id}', 'plan_name': '${plan.name}', 'language': '${currentLang}' }); }`}
               class="w-full mt-4 py-2.5 px-4 rounded-xl font-bold text-xs uppercase text-center flex items-center justify-center gap-2 text-white bg-slate-800 hover:bg-emerald-600 border border-slate-700 hover:border-emerald-500 transition-all duration-300"
             >
               <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">

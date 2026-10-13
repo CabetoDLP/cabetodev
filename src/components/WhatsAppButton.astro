@@ -29,6 +29,7 @@ const whatsappUrl = `https://wa.me/${businessPhone}?text=${encodeURIComponent(de
     target="_blank"
     rel="noopener noreferrer"
     aria-label={isEnglish ? "Chat on WhatsApp Business" : "Chatear por WhatsApp Business"}
+    onclick={`if(typeof gtag === 'function'){ gtag('event', 'click_whatsapp_button', { 'language': '${currentLang}' }); }`}
     class="w-14 h-14 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all duration-300 hover:scale-105 cursor-pointer"
   >
     <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">

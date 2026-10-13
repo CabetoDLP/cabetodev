@@ -156,13 +156,21 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
 
 
   // =========================================================
-  // ABRIR / CERRAR CHAT
+  // ABRIR / CERRAR CHAT (CON GA4 TRACKING)
   // =========================================================
 
   toggleBtn?.addEventListener('click', () => {
+    const isOpening = chatWindow?.classList.contains('hidden');
     chatWindow?.classList.toggle('hidden');
 
-    if (!chatWindow?.classList.contains('hidden')) {
+    if (isOpening) {
+      // Disparar evento personalizado a Google Analytics 4
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'open_chat_bot', {
+          language: CURRENT_LANG
+        });
+      }
+
       setTimeout(() => {
         chatInput?.focus();
       }, 100);
