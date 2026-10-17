@@ -1,4 +1,5 @@
 ---
+// src/layouts/Layout.astro
 import Chatbot from '../components/Chatbot.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 
@@ -58,9 +59,14 @@ const jsonLdWebSite = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Carlos Alberto de la Peña Jácome" />
-    <meta name="keywords" content="Carlos de la Peña, CabetoDev, cabetodev, Developer, Web Developer,  Full Stack Engineer, Software Developer, React, Next.js, Node.js, TypeScript, Astro, Systems Engineer, Portafolio" />
+    <meta name="keywords" content="Carlos de la Peña, CabetoDev, cabetodev, Developer, Web Developer, Full Stack Engineer, Software Developer, React, Next.js, Node.js, TypeScript, Astro, Systems Engineer, Portafolio" />
     <link rel="canonical" href={siteUrl} />
     <meta name="robots" content="index, follow" />
+
+    <!-- SEO Bilingüe (hreflang) -->
+    <link rel="alternate" hreflang="es" href={siteUrl} />
+    <link rel="alternate" hreflang="en" href={siteUrl} />
+    <link rel="alternate" hreflang="x-default" href={siteUrl} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -117,13 +123,14 @@ const jsonLdWebSite = {
     <div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/20 rounded-full blur-[140px] pointer-events-none z-0"></div>
     <div class="fixed bottom-10 right-10 w-[350px] h-[350px] bg-purple-600/15 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
-    <!-- Contenido inyectado -->
+    <!-- Contenido principal inyectado -->
     <div class="relative z-10">
       <slot />
     </div>
 
-    <Chatbot lang={lang} />
-    <WhatsAppButton lang={lang} />
+    <!-- Componentes Flotantes Únicos (Elimina la duplicación de IDs) -->
+    <Chatbot lang="es" />
+    <WhatsAppButton lang="es" />
   </body>
 </html>
 
@@ -142,4 +149,8 @@ const jsonLdWebSite = {
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
   }
+
+  /* Control dinámico de idioma por CSS */
+  html[lang="es"] .only-en { display: none !important; }
+  html[lang="en"] .only-es { display: none !important; }
 </style>

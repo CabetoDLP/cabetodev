@@ -6,14 +6,6 @@ interface Props {
 }
 
 const { lang = 'spanish' } = Astro.props;
-
-// Normalización estándar del idioma
-const isEnglish = lang === 'english' || lang === 'en';
-const currentLangKey = isEnglish ? 'english' : 'spanish';
-
-// Extraemos los textos directamente del objeto ui
-const t = ui[currentLangKey] || ui.spanish;
-
 const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
 ---
 
@@ -24,7 +16,7 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
     id="chat-toggle-btn"
     type="button"
     class="w-14 h-14 rounded-full bg-red-600 hover:bg-red-500 text-white flex items-center justify-center shadow-[0_0_25px_rgba(220,38,38,0.5)] transition-all duration-300 hover:scale-105 cursor-pointer"
-    aria-label={t.botAriaOpen || "Abrir Asistente AI"}
+    aria-label="Asistente AI"
   >
     <img 
       src="/icons/ai.svg" 
@@ -33,23 +25,27 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
     />
   </button>
 
-
-  <!-- Ventana de chat -->
+  <!-- Ventana de chat con diccionarios embebidos para sincronización instantánea -->
   <div
     id="chat-window"
     data-api-key={apiKey}
-    data-lang={isEnglish ? 'en' : 'es'}
-    data-typing-text={t.botTyping || (isEnglish ? 'Typing...' : 'Escribiendo...')}
-    data-error-text={t.botError || (isEnglish ? 'An error occurred while connecting to the assistant. Please try again.' : 'Ocurrió un error al conectar con el asistente. Inténtalo nuevamente.')}
+    data-welcome-es={ui.spanish.botInitialMessage}
+    data-welcome-en={ui.english.botInitialMessage}
+    data-placeholder-es={ui.spanish.botPlaceholder}
+    data-placeholder-en={ui.english.botPlaceholder}
+    data-send-es={ui.spanish.botSendText || 'Enviar'}
+    data-send-en={ui.english.botSendText || 'Send'}
+    data-typing-es={ui.spanish.botTyping || 'Escribiendo...'}
+    data-typing-en={ui.english.botTyping || 'Typing...'}
+    data-error-es={ui.spanish.botError || 'Ocurrió un error al conectar con el asistente.'}
+    data-error-en={ui.english.botError || 'An error occurred while connecting to the assistant.'}
     class="hidden absolute bottom-18 right-0 w-[88vw] sm:w-96 h-[450px] bg-slate-950 border border-red-500/40 rounded-2xl shadow-[0_0_40px_rgba(239,68,68,0.2)] flex flex-col overflow-hidden backdrop-blur-xl"
   >
 
     <!-- Header -->
     <div class="p-4 bg-slate-900 border-b border-slate-800 flex justify-between items-center">
-
       <div class="flex items-center gap-2">
         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-
         <h3 class="text-white font-mono font-bold text-sm uppercase">
           // Cabeto Bot AI
         </h3>
@@ -59,37 +55,31 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
         id="chat-close-btn"
         type="button"
         class="text-slate-400 hover:text-white text-lg cursor-pointer"
-        aria-label={t.botAriaClose || "Cerrar chat"}
+        aria-label="Cerrar chat"
       >
         ✕
       </button>
-
     </div>
-
 
     <!-- Mensajes -->
     <div
       id="chat-messages"
       class="flex-1 p-4 overflow-y-auto space-y-3 font-sans text-sm"
     >
-
-      <div class="bg-slate-900 border border-slate-800 text-slate-300 p-3 rounded-xl max-w-[85%] self-start animate-message">
-        {t.botInitialMessage}
+      <div id="bot-welcome-msg" class="bg-slate-900 border border-slate-800 text-slate-300 p-3 rounded-xl max-w-[85%] self-start animate-message">
+        {ui.spanish.botInitialMessage}
       </div>
-
     </div>
-
 
     <!-- Formulario -->
     <form
       id="chat-form"
       class="p-3 border-t border-slate-800 bg-slate-900/50 flex gap-2"
     >
-
       <input
         type="text"
         id="chat-input"
-        placeholder={t.botPlaceholder}
+        placeholder={ui.spanish.botPlaceholder}
         autocomplete="off"
         class="flex-1 bg-slate-950 border border-slate-800 focus:border-red-500 rounded-xl px-3 py-2 text-white text-sm focus:outline-none placeholder:text-slate-600"
         required
@@ -100,9 +90,8 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
         id="chat-send-btn"
         class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-bold uppercase transition-colors cursor-pointer"
       >
-        {t.botSendText}
+        {ui.spanish.botSendText || 'Enviar'}
       </button>
-
     </form>
 
   </div>
@@ -128,7 +117,7 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
 <script is:inline>
 
   // =========================================================
-  // ELEMENTOS DEL DOM Y DATASET (UI TRANSLATIONS)
+  // ELEMENTOS DEL DOM
   // =========================================================
 
   const toggleBtn = document.getElementById('chat-toggle-btn');
@@ -138,21 +127,53 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
   const chatInput = document.getElementById('chat-input');
   const chatMessages = document.getElementById('chat-messages');
   const sendBtn = document.getElementById('chat-send-btn');
+  const welcomeMsg = document.getElementById('bot-welcome-msg');
 
   const API_KEY = chatWindow?.dataset.apiKey || '';
-  const CURRENT_LANG = chatWindow?.dataset.lang || 'es';
-  const TYPING_TEXT = chatWindow?.dataset.typingText || 'Escribiendo...';
-  const ERROR_TEXT = chatWindow?.dataset.errorText || 'Ocurrió un error al conectar con el asistente.';
-
 
   // =========================================================
   // MODELOS
   // =========================================================
 
   const MODELS = [
-    'gemini-3.5-flash-lite',
-    'gemini-3.8-flash'
+    'gemini-2.5-flash',
+    'gemini-1.5-flash'
   ];
+
+  // Helper para obtener el idioma activo del DOM en tiempo real
+  function getCurrentLang() {
+    return document.documentElement.lang === 'en' ? 'en' : 'es';
+  }
+
+  // Sincroniza dinámicamente los textos del chat sin recargar
+  function updateChatLanguage() {
+    const lang = getCurrentLang();
+
+    if (chatInput) {
+      chatInput.placeholder = lang === 'en'
+        ? (chatWindow?.dataset.placeholderEn || 'Type a message...')
+        : (chatWindow?.dataset.placeholderEs || 'Escribe un mensaje...');
+    }
+
+    if (sendBtn) {
+      sendBtn.textContent = lang === 'en'
+        ? (chatWindow?.dataset.sendEn || 'SEND')
+        : (chatWindow?.dataset.sendEs || 'ENVIAR');
+    }
+
+    // Actualiza el mensaje de bienvenida si el usuario aún no ha iniciado conversación
+    if (welcomeMsg && chatMessages?.children.length === 1) {
+      welcomeMsg.textContent = lang === 'en'
+        ? (chatWindow?.dataset.welcomeEn || "Hello!...")
+        : (chatWindow?.dataset.welcomeEs || "¡Hola!...");
+    }
+  }
+
+  // Observador de cambios en el atributo lang del HTML
+  const langObserver = new MutationObserver(() => {
+    updateChatLanguage();
+  });
+  langObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 
 
   // =========================================================
@@ -164,10 +185,11 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
     chatWindow?.classList.toggle('hidden');
 
     if (isOpening) {
-      // Disparar evento personalizado a Google Analytics 4
+      updateChatLanguage();
+
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'open_chat_bot', {
-          language: CURRENT_LANG
+          language: getCurrentLang()
         });
       }
 
@@ -183,7 +205,7 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
 
 
   // =========================================================
-  // SCROLL
+  // SCROLL Y MESAJE CREATION
   // =========================================================
 
   function scrollToBottom() {
@@ -191,11 +213,6 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
   }
-
-
-  // =========================================================
-  // CREAR MENSAJE
-  // =========================================================
 
   function addMessage(text, type) {
     const bubble = document.createElement('div');
@@ -215,18 +232,15 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
     return bubble;
   }
 
-
-  // =========================================================
-  // MENSAJE "ESCRIBIENDO..."
-  // =========================================================
-
   function addLoadingMessage() {
     const bubble = document.createElement('div');
-
     bubble.className =
       'bg-slate-900 text-slate-400 p-3 rounded-xl max-w-[85%] self-start animate-pulse animate-message';
 
-    bubble.textContent = TYPING_TEXT;
+    const lang = getCurrentLang();
+    bubble.textContent = lang === 'en'
+      ? (chatWindow?.dataset.typingEn || 'Typing...')
+      : (chatWindow?.dataset.typingEs || 'Escribiendo...');
 
     chatMessages?.appendChild(bubble);
     scrollToBottom();
@@ -236,13 +250,15 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
 
 
   // =========================================================
-  // CONSULTAR GEMINI
+  // CONSULTAR GEMINI (CON SYSTEM PROMPT COMPLETO)
   // =========================================================
 
   async function askGemini(userText) {
     if (!API_KEY) {
       throw new Error('Gemini API key is missing.');
     }
+
+    const currentLang = getCurrentLang();
 
     const systemPrompt = `
 Eres el asistente virtual interactivo oficial para el portafolio web de Carlos Alberto de la Peña Jácome (CabetoDev / CabetoArt).
@@ -296,14 +312,11 @@ Tu objetivo principal es responder inquietudes de reclutadores, clientes y visit
 - SaaS / Web App Custom MVP ($3,500 - $6,000+ USD | 120-180+ hrs est.): Arquitectura Full-Stack a medida, autenticación JWT/OAuth, dashboard interactivo, suscripciones.
 - Mantenimiento Recurrente (Retainers): Micro Care ($50–$80 USD/mes), Basic Support ($150–$250 USD/mes), Growth & Pro ($400–$700 USD/mes).
 
-**Faceta Creativa (CabetoArt):**
-- Carlos realiza ilustración digital, arte conceptual, fan art y acepta comisiones personalizadas bajo la marca "CabetoArt".
-
 ---
 
 ### REGLAS Y COMPORTAMIENTO DEL BOT
 
-1. Idioma: Responde SIEMPRE en el mismo idioma en el que te hable el usuario (Español o Inglés). Por defecto utiliza el idioma actual de la página: \${CURRENT_LANG === 'en' ? 'Inglés' : 'Español'}.
+1. Idioma: Responde SIEMPRE en el mismo idioma en el que te hable el usuario (Español o Inglés). Por defecto utiliza el idioma actual de la página: ${currentLang === 'en' ? 'Inglés' : 'Español'}.
 2. Tono y Formato: Sé profesional, amigable y directo al punto. Limita tus respuestas a un máximo de 2 párrafos o una lista corta bien estructurada.
 3. Información Telefónica y Contacto: Si solicitan contactar a Carlos o piden su número de WhatsApp empresarial, proporciona el +57 3169209202 o invítalos a enviar un mensaje a través del formulario o redes sociales del sitio.
 4. Servicios y Precios: Si preguntan por presupuestos o cotizaciones de proyectos web, proporciona los rangos del catálogo de servicios según el tipo de solución que busquen.
@@ -375,7 +388,6 @@ Tu objetivo principal es responder inquietudes de reclutadores, clientes y visit
     event.preventDefault();
 
     const text = chatInput?.value.trim();
-
     if (!text) return;
 
     addMessage(text, 'user');
@@ -396,7 +408,11 @@ Tu objetivo principal es responder inquietudes de reclutadores, clientes y visit
     } catch (error) {
       console.error('Error consultando Gemini:', error);
       loadingBubble?.remove();
-      addMessage(ERROR_TEXT, 'bot');
+      const lang = getCurrentLang();
+      const errText = lang === 'en'
+        ? (chatWindow?.dataset.errorEn || 'An error occurred while connecting to the assistant.')
+        : (chatWindow?.dataset.errorEs || 'Ocurrió un error al conectar con el asistente.');
+      addMessage(errText, 'bot');
     } finally {
       if (sendBtn) {
         sendBtn.disabled = false;

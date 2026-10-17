@@ -1,42 +1,130 @@
 ---
 // src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import Projects from '../components/Projects.astro';
+import Skills from '../components/Skills.astro';
+import Experience from '../components/Experience.astro';
+import Studies from '../components/Studies.astro';
+import Faq from '../components/Faq.astro';
+import Contact from '../components/Contact.astro';
 ---
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CabetoDev | Full Stack Developer</title>
-    
-    <!-- Detección instantánea de idioma antes de pintar la pantalla -->
-    <script is:inline>
-      (function() {
-        try {
-          // 1. Obtener idioma del navegador (ej: 'en-US', 'es-CO')
-          const userLang = (navigator.language || navigator.userLanguage || 'es').toLowerCase();
-          
-          // 2. Verificar si ya redirigimos en esta sesión para evitar bucles en Safari
-          const hasRedirected = sessionStorage.getItem('i18n_redirected');
 
-          if (!hasRedirected) {
-            sessionStorage.setItem('i18n_redirected', 'true');
-            if (userLang.startsWith('en')) {
-              window.location.replace('/en/');
-            } else {
-              window.location.replace('/es/');
-            }
+<Layout 
+  title="CabetoDev | Desarrollador Full Stack & Ilustrador Digital"
+  description="Sitio oficial de Carlos Alberto de la Peña Jácome. Ingeniero de Sistemas y Desarrollador Full Stack freelance."
+  lang="es"
+>
+  <style>
+    /* Control dinámico de idioma por CSS ultra rápido */
+    html[lang="es"] .only-en { display: none !important; }
+    html[lang="en"] .only-es { display: none !important; }
+  </style>
+
+  <script is:inline>
+    // Diccionario de SEO dinámico para la misma página
+    const seoMeta = {
+      es: {
+        title: "CabetoDev | Desarrollador Full Stack & Ilustrador Digital",
+        description: "Sitio oficial de Carlos Alberto de la Peña Jácome. Ingeniero de Sistemas y Desarrollador Full Stack freelance."
+      },
+      en: {
+        title: "CabetoDev | Full Stack Developer & Digital Illustrator",
+        description: "Official portfolio of Carlos Alberto de la Peña Jácome. Systems Engineer and Full Stack Developer."
+      }
+    };
+
+    window.switchLanguage = function(lang) {
+      localStorage.setItem('preferred_lang', lang);
+      document.documentElement.lang = lang;
+
+      // 1. Actualizar SEO dinámicamente (Título y Meta Descripción)
+      const meta = seoMeta[lang] || seoMeta.es;
+      document.title = meta.title;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', meta.description);
+      }
+
+      // 2. Actualizar estados visuales de los botones del Navbar
+      const btnsEs = document.querySelectorAll('.btn-lang-es');
+      const btnsEn = document.querySelectorAll('.btn-lang-en');
+
+      if (lang === 'en') {
+        btnsEn.forEach(b => { b.classList.add('bg-red-600', 'text-white', 'font-bold'); b.classList.remove('text-slate-400'); });
+        btnsEs.forEach(b => { b.classList.remove('bg-red-600', 'text-white', 'font-bold'); b.classList.add('text-slate-400'); });
+      } else {
+        btnsEs.forEach(b => { b.classList.add('bg-red-600', 'text-white', 'font-bold'); b.classList.remove('text-slate-400'); });
+        btnsEn.forEach(b => { b.classList.remove('bg-red-600', 'text-white', 'font-bold'); b.classList.add('text-slate-400'); });
+      }
+    };
+
+    // Interceptor global de scroll para los índices del Navbar
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+      
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#') && href.length > 1) {
+        e.preventDefault();
+        const targetId = href.substring(1);
+        
+        const currentLang = document.documentElement.lang || 'es';
+        const activeContainer = currentLang === 'en' 
+          ? document.querySelector('.only-en') 
+          : document.querySelector('.only-es');
+
+        if (activeContainer) {
+          const targetElement = activeContainer.querySelector('#' + targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-        } catch (e) {
-          // Si el navegador bloquea scripts o storage, cae al fallback
-          window.location.replace('/es/');
         }
-      })();
-    </script>
+      }
+    });
 
-    <!-- Fallback si el usuario tiene JavaScript totalmente desactivado -->
-    <noscript>
-      <meta http-equiv="refresh" content="0;url=/es/" />
-    </noscript>
-  </head>
-  <body class="bg-slate-950"></body>
-</html>
+    // Autodetección al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('preferred_lang');
+      const userLang = savedLang || (navigator.language || 'es').toLowerCase();
+      
+      if (userLang.startsWith('en') || savedLang === 'en') {
+        window.switchLanguage('en');
+      } else {
+        window.switchLanguage('es');
+      }
+    });
+  </script>
+
+  <!-- BLOQUE EN ESPAÑOL -->
+  <div class="only-es">
+    <Navbar lang="es" />
+    <main class="pt-16">
+      <Hero lang="es" />
+      <Services lang="es" />
+      <Projects lang="es" />
+      <Skills lang="es" />
+      <Experience lang="es" />
+      <Studies lang="es" />
+      <Faq lang="es" />
+      <Contact lang="es" />
+    </main>
+  </div>
+
+  <!-- BLOQUE EN INGLÉS -->
+  <div class="only-en">
+    <Navbar lang="en" />
+    <main class="pt-16">
+      <Hero lang="en" />
+      <Services lang="en" />
+      <Projects lang="en" />
+      <Skills lang="en" />
+      <Experience lang="en" />
+      <Studies lang="en" />
+      <Faq lang="en" />
+      <Contact lang="en" />
+    </main>
+  </div>
+</Layout>
