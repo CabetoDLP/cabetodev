@@ -7,8 +7,8 @@ import Experience from '../../components/Experience.astro';
 import Studies from '../../components/Studies.astro';
 import Projects from '../../components/Projects.astro';
 import Services from '../../components/Services.astro';
-import Files from '../../components/Files.astro';
 import Contact from '../../components/Contact.astro';
+import Faq from '../../components/Faq.astro';
 
 const lang = 'english'; // o 'en' según manejes tu objeto ui
 ---
@@ -21,12 +21,12 @@ const lang = 'english'; // o 'en' según manejes tu objeto ui
   <Navbar lang={lang} />
   <main class="pt-16">
     <Hero lang={lang} />
+    <Services lang={lang} />
+    <Projects lang={lang} />
     <Skills lang={lang} />
     <Experience lang={lang} />
     <Studies lang={lang} />
-    <Projects lang={lang} />
-    <Services lang={lang} />
+    <Faq lang={lang} />
     <Contact lang={lang} />
-    <Files lang={lang} />
   </main>
 </Layout>

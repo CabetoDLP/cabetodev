@@ -20,11 +20,11 @@ const uiBase = {
     aFilesText: 'Anexos',
 
     // Hero Section
-    heroBadge: 'Desarrollador y Artista Digital',
+    heroBadge: 'Desarrollador Web',
     heroFirstName: 'Carlos',
     heroLastName: 'de la Peña',
     heroRole: 'Full Stack Engineer',
-    descriptionText: 'Ingeniero de sistemas enfocado en el desarrollo de soluciones web escalables y experiencias digitales. Con sólida experiencia técnica tanto en el desarrollo Front-end como Back-end, disponible para colaborar en equipos de alto rendimiento o proyectos independientes.',
+    descriptionText: 'Ingeniero de sistemas y desarrollador Full Stack especializado en construir sitios web rápidos y aplicaciones a medida que transforman visitantes en clientes. Experiencia en arquitectura robusta y software de alto rendimiento para proyectos exigentes.',
     heroStatusLabel: 'ESTADO',
     heroStatusValue: 'Disponible para Proyectos',
 
@@ -154,6 +154,29 @@ const uiBase = {
     modalErrorTitle: '// Error al Enviar',
     modalConfirmBtn: 'Aceptar',
 
+    //Faq
+
+    aFaqText: 'FAQ',
+
+    faqBadge: '// METODOLOGÍA & CONDICIONES',
+    faqTitle: 'Preguntas Frecuentes',
+    faqSubtitle: 'Transparencia total sobre metodologías, pagos, costos externos y entrega de proyectos.',
+
+    faq1Q: '¿Cómo es la metodología de trabajo paso a paso?',
+    faq1A: 'Iniciamos con una consulta técnica para definir requerimientos. Luego te entrego una propuesta de alcance e inversión fija. Desarrollamos con un enlace de vista previa en privado desde el primer día para avances semanales, terminando con pruebas, lanzamiento y 30 días de soporte post-entrega.',
+
+    faq2Q: '¿Cómo funcionan los esquemas y hitos de pago?',
+    faq2A: 'Para proyectos pequeños y medianos (Landing Pages / Sitios Corporativos), se maneja un esquema 50% de anticipo y 50% restante al finalizar. Para proyectos grandes (E-Commerce / SaaS Custom), el esquema es 40% inicial, 30% a mitad de desarrollo (al validar prototipo funcional) y 30% final al lanzar.',
+
+    faq3Q: '¿Qué medios de pago internacionales aceptan?',
+    faq3A: 'Aceptamos transferencias bancarias internacionales directas, Wise (ideal para comisiones bajas en USD/EUR), PayPal y pasarelas de pago digitales. Cada pago cuenta con su respectiva factura legal.',
+
+    faq4Q: '¿Quién asume los costos de Hosting, Dominio, APIs y Pasarelas?',
+    faq4A: 'Los costos operativos de terceros no están incluidos en la tarifa de desarrollo y corren por cuenta del cliente. Yo te guío en la creación de cuentas para que todo quede directamente a tu nombre (Vercel, Render, AWS, Stripe, compra de dominios, etc.).',
+
+    faq5Q: '¿De quién es el sitio web, el código fuente y las bases de datos?',
+    faq5A: 'El 100% de la propiedad, repositorios en GitHub, accesos a bases de datos y credenciales se transfieren a tu nombre una vez liquidado el 100% del pago acordado. Durante el desarrollo trabajamos en un entorno de pruebas propio. Una vez pagado, no hay ataduras ni dependencias obligatorias.',
+
     // Files / HV
     filesBadge: 'Credenciales & Trayectoria',
     filesTitle: '¿Quieres evaluar mi perfil completo?',
@@ -184,11 +207,11 @@ const uiBase = {
     aFilesText: 'Files',
 
     // Hero Section
-    heroBadge: 'Developer & Digital Artist',
+    heroBadge: 'Web Developer',
     heroFirstName: 'Carlos',
     heroLastName: 'de la Peña',
     heroRole: 'Full Stack Engineer',
-    descriptionText: 'Systems engineer focused on developing scalable web solutions and high-impact digital experiences. Possessing strong technical experience in both Front-end and Back-end development, open to teamwork or freelance web projects.',
+    descriptionText: 'Systems engineer and full stack developer specialized in building fast websites and custom web apps that turn visitors into clients. Solid backend and frontend expertise for high-impact projects.',
     heroStatusLabel: 'STATUS',
     heroStatusValue: 'Available for Projects',
 
@@ -218,7 +241,6 @@ const uiBase = {
     modalStackUsed: '// Tech Stack Used',
     modalLiveDemo: 'View Live Project',
     modalGithubRepo: 'GitHub Repository',
-    
 
     // Services
     servicesTitle: "Service Catalog & Pricing",
@@ -313,6 +335,29 @@ const uiBase = {
     modalSuccessTitle: '// Message Sent!',
     modalErrorTitle: '// Error Sending',
     modalConfirmBtn: 'OK',
+
+    // Faq
+
+    aFaqText: 'FAQ',
+
+    faqBadge: '// METHODOLOGY & TERMS',
+    faqTitle: 'Frequently Asked Questions',
+    faqSubtitle: 'Full transparency regarding workflow, payments, third-party costs, and project delivery.',
+
+    faq1Q: 'What is the step-by-step working methodology?',
+    faq1A: 'We start with a tech consultation to map requirements. I provide a fixed proposal with clear scope. We build with a private staging link from day one for weekly progress, ending with testing, launch, and 30 days of post-delivery support.',
+
+    faq2Q: 'How do payment milestones and schedules work?',
+    faq2A: 'For small to medium projects (Landing Pages / Corporate Sites), we use a 50% upfront and 50% upon completion model. For large projects (E-Commerce / Custom SaaS), the schedule is 40% upfront, 30% mid-development (upon functional prototype), and 30% at launch.',
+
+    faq3Q: 'What international payment methods are accepted?',
+    faq3A: 'We accept direct international wire transfers, Wise (low fees for USD/EUR), PayPal, and digital payment gateways. Every payment includes an official legal invoice.',
+
+    faq4Q: 'Who covers Hosting, Domain, API, and Payment Gateway costs?',
+    faq4A: 'Third-party operational costs are not included in the development fee and are paid directly by the client. I assist you in setting up accounts registered under your name (Vercel, Render, AWS, Stripe, domain registrars, etc.).',
+
+    faq5Q: 'Who owns the website, source code, and databases?',
+    faq5A: '100% ownership, GitHub repositories, database credentials, and access are transferred under your name once 100% of the agreed payment is settled. During development, we host on our staging environment. Once paid, zero vendor lock-in.',
 
     // Files / CV
     filesBadge: 'Credentials & Track Record',

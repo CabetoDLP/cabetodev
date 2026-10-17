@@ -4,7 +4,7 @@ const robotsTxt = `
 User-agent: *
 Allow: /
 
-Sitemap: https://cabetodev.onrender.com/sitemap-index.xml
+Sitemap: https://cabeto.dev/sitemap-index.xml
 `.trim();
 
 export const GET: APIRoute = () => {
