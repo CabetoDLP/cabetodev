@@ -1,5 +1,9 @@
 ---
 // src/layouts/Layout.astro
+import '@fontsource-variable/plus-jakarta-sans';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/600.css';
+import '@fontsource/space-grotesk/700.css';
 import Chatbot from '../components/Chatbot.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 
@@ -11,8 +15,8 @@ interface Props {
 
 const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 
-const { 
-  title = 'Carlos de la Peña | Full Stack Engineer & Software Developer', 
+const {  
+  title = 'Carlos de la Peña | Full Stack Engineer & Software Developer',  
   description = 'Portafolio profesional de Carlos Alberto de la Peña Jácome. Ingeniero de Sistemas y Desarrollador Full Stack especializado en React, Next.js, Node.js y C#.',
   lang = 'spanish' 
 } = Astro.props;
@@ -90,14 +94,6 @@ const jsonLdWebSite = {
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192x192.png" />
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link 
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Space+Grotesk:wght@400;600;700&display=swap" 
-      rel="stylesheet" 
-    />
-
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLdPerson)} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLdWebSite)} />
@@ -128,7 +124,7 @@ const jsonLdWebSite = {
       <slot />
     </div>
 
-    <!-- Componentes Flotantes Únicos (Elimina la duplicación de IDs) -->
+    <!-- Componentes Flotantes Únicos -->
     <Chatbot lang="es" />
     <WhatsAppButton lang="es" />
   </body>
@@ -139,7 +135,7 @@ const jsonLdWebSite = {
 
   :root {
     --font-heading: 'Space Grotesk', sans-serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Plus Jakarta Sans Variable', sans-serif;
   }
 
   body {

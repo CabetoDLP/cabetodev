@@ -1,5 +1,4 @@
 ---
-// src/components/Contact.astro
 import { languages, ui } from '../language/ui';
 
 interface Props {
@@ -47,7 +46,7 @@ const t = ui[currentLang] || ui.spanish;
         class="group p-5 bg-slate-900/80 border border-slate-800 hover:border-pink-500/50 rounded-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(236,72,153,0.25)] flex flex-col items-center text-center gap-3"
       >
         <div class="p-3 bg-pink-500/10 rounded-xl text-pink-400 group-hover:scale-110 transition-transform">
-          <img src="/icons/instagram.svg" alt="Instagram" class="w-7 h-7 filter invert" />
+          <img src="/icons/instagram.svg" alt="Instagram" width="28" height="28" loading="lazy" decoding="async" class="w-7 h-7 filter invert" />
         </div>
         <div>
           <h3 class="font-bold text-white text-sm">Instagram</h3>
@@ -62,7 +61,7 @@ const t = ui[currentLang] || ui.spanish;
         class="group p-5 bg-slate-900/80 border border-slate-800 hover:border-sky-500/50 rounded-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(14,165,233,0.25)] flex flex-col items-center text-center gap-3"
       >
         <div class="p-3 bg-sky-500/10 rounded-xl text-sky-400 group-hover:scale-110 transition-transform">
-          <img src="/icons/linkedin.svg" alt="LinkedIn" class="w-7 h-7 filter invert" />
+          <img src="/icons/linkedin.svg" alt="LinkedIn" width="28" height="28" loading="lazy" decoding="async" class="w-7 h-7 filter invert" />
         </div>
         <div>
           <h3 class="font-bold text-white text-sm">LinkedIn</h3>
@@ -77,7 +76,7 @@ const t = ui[currentLang] || ui.spanish;
         class="group p-5 bg-slate-900/80 border border-slate-800 hover:border-purple-500/50 rounded-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)] flex flex-col items-center text-center gap-3"
       >
         <div class="p-3 bg-purple-500/10 rounded-xl text-purple-400 group-hover:scale-110 transition-transform">
-          <img src="/icons/github.svg" alt="GitHub" class="w-7 h-7 filter invert" />
+          <img src="/icons/github.svg" alt="GitHub" width="28" height="28" loading="lazy" decoding="async" class="w-7 h-7 filter invert" />
         </div>
         <div>
           <h3 class="font-bold text-white text-sm">GitHub</h3>
@@ -92,7 +91,7 @@ const t = ui[currentLang] || ui.spanish;
         class="group p-5 bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 rounded-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(16,185,129,0.25)] flex flex-col items-center text-center gap-3"
       >
         <div class="p-3 bg-emerald-500/10 rounded-xl text-emerald-400 group-hover:scale-110 transition-transform">
-          <img src="/icons/whatsapp.svg" alt="WhatsApp" class="w-7 h-7 filter invert" />
+          <img src="/icons/whatsapp.svg" alt="WhatsApp" width="28" height="28" loading="lazy" decoding="async" class="w-7 h-7 filter invert" />
         </div>
         <div>
           <h3 class="font-bold text-white text-sm">WhatsApp</h3>
@@ -107,7 +106,7 @@ const t = ui[currentLang] || ui.spanish;
         class="group p-5 bg-slate-900/80 border border-slate-800 hover:border-[#505FF7]/50 rounded-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(80,95,247,0.3)] flex flex-col items-center text-center gap-3"
       >
         <div class="p-3 bg-[#505FF7]/20 rounded-xl text-[#505FF7] group-hover:scale-110 transition-transform">
-          <img src="/icons/discord.svg" alt="Discord" class="w-7 h-7 filter invert" />
+          <img src="/icons/discord.svg" alt="Discord" width="28" height="28" loading="lazy" decoding="async" class="w-7 h-7 filter invert" />
         </div>
         <div>
           <h3 class="font-bold text-white text-sm">Discord</h3>
@@ -188,90 +187,102 @@ const t = ui[currentLang] || ui.spanish;
   </div>
 </section>
 
-<!-- EmailJS SDK e Inicialización -->
-<script is:inline src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- EmailJS SDK cargado de manera asíncrona y diferida para no bloquear la ruta crítica -->
+<script is:inline defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script is:inline>
-  if (typeof emailjs !== 'undefined') {
-    emailjs.init('SAgSIGAClA8pFzI8A');
-  }
-
-  const form = document.getElementById('contact-form');
-  const modal = document.getElementById('contact-modal');
-  const closeModalBtn = document.getElementById('close-contact-modal');
-  const modalContent = document.getElementById('contact-modal-content');
-
-  const openContactModal = (isSuccess, text) => {
-    if (!modalContent || !modal || !form) return;
-
-    const titleSuccess = form.getAttribute('data-success-title') || '// ¡Mensaje Enviado!';
-    const titleError = form.getAttribute('data-error-title') || '// Error al Enviar';
-    const btnText = form.getAttribute('data-confirm-btn') || 'Aceptar';
-
-    modalContent.innerHTML = `
-      <div class="mx-auto w-12 h-12 rounded-full ${isSuccess ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' : 'bg-red-500/10 text-red-400 border border-red-500/30'} flex items-center justify-center text-xl font-bold">
-        ${isSuccess ? '✓' : '✕'}
-      </div>
-      <h3 class="text-xl font-black uppercase text-white tracking-wide">
-        ${isSuccess ? titleSuccess : titleError}
-      </h3>
-      <p class="text-slate-300 text-sm leading-relaxed">
-        ${text}
-      </p>
-      <button 
-        id="modal-confirm-btn" 
-        class="w-full mt-4 py-3 rounded-xl font-bold text-xs uppercase tracking-wider ${isSuccess ? 'bg-emerald-600 hover:bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3)]' : 'bg-red-600 hover:bg-red-500 shadow-[0_0_20px_rgba(220,38,38,0.4)]'} text-white transition-all"
-      >
-        ${btnText}
-      </button>
-    `;
-
-    modal.classList.remove('opacity-0', 'pointer-events-none');
-    modal.firstElementChild?.classList.remove('scale-95');
-
-    document.getElementById('modal-confirm-btn')?.addEventListener('click', closeContactModal);
-  };
-
-  const closeContactModal = () => {
-    if (!modal) return;
-    modal.classList.add('opacity-0', 'pointer-events-none');
-    modal.firstElementChild?.classList.add('scale-95');
-  };
-
-  closeModalBtn?.addEventListener('click', closeContactModal);
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) closeContactModal();
-  });
-
-  if (form) {
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const sendBtn = document.getElementById('send-btn');
-      if (sendBtn) sendBtn.disabled = true;
-
-      const successMsg = form.getAttribute('data-send-message') || "Mensaje enviado exitosamente";
-      const errorMsg = form.getAttribute('data-error-message') || "Ocurrió un error al enviar el mensaje";
-
-      const nameVal = document.getElementById('form-name').value;
-      const emailVal = document.getElementById('form-email').value;
-      const messageVal = document.getElementById('form-message').value;
-
-      emailjs.send("service_mwy96o9", "template_lkgggnn", {
-        from_name: nameVal,
-        message: messageVal,
-        email_id: emailVal
-      })
-      .then(() => {
-        openContactModal(true, successMsg);
-        form.reset();
-      })
-      .catch((error) => {
-        openContactModal(false, errorMsg);
-        console.error("Error EmailJS:", error);
-      })
-      .finally(() => {
-        if (sendBtn) sendBtn.disabled = false;
-      });
+  (function() {
+    // Inicialización segura diferida
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init('SAgSIGAClA8pFzI8A');
+      }
     });
-  }
+
+    const form = document.getElementById('contact-form');
+    const modal = document.getElementById('contact-modal');
+    const closeModalBtn = document.getElementById('close-contact-modal');
+    const modalContent = document.getElementById('contact-modal-content');
+
+    const openContactModal = (isSuccess, text) => {
+      if (!modalContent || !modal || !form) return;
+
+      const titleSuccess = form.getAttribute('data-success-title') || '// ¡Mensaje Enviado!';
+      const titleError = form.getAttribute('data-error-title') || '// Error al Enviar';
+      const btnText = form.getAttribute('data-confirm-btn') || 'Aceptar';
+
+      modalContent.innerHTML = `
+        <div class="mx-auto w-12 h-12 rounded-full ${isSuccess ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' : 'bg-red-500/10 text-red-400 border border-red-500/30'} flex items-center justify-center text-xl font-bold">
+          ${isSuccess ? '✓' : '✕'}
+        </div>
+        <h3 class="text-xl font-black uppercase text-white tracking-wide">
+          ${isSuccess ? titleSuccess : titleError}
+        </h3>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          ${text}
+        </p>
+        <button 
+          id="modal-confirm-btn" 
+          class="w-full mt-4 py-3 rounded-xl font-bold text-xs uppercase tracking-wider ${isSuccess ? 'bg-emerald-600 hover:bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3)]' : 'bg-red-600 hover:bg-red-500 shadow-[0_0_20px_rgba(220,38,38,0.4)]'} text-white transition-all"
+        >
+          ${btnText}
+        </button>
+      `;
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modal.firstElementChild?.classList.remove('scale-95');
+
+      document.getElementById('modal-confirm-btn')?.addEventListener('click', closeContactModal);
+    };
+
+    const closeContactModal = () => {
+      if (!modal) return;
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modal.firstElementChild?.classList.add('scale-95');
+    };
+
+    closeModalBtn?.addEventListener('click', closeContactModal);
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) closeContactModal();
+    });
+
+    if (form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const sendBtn = document.getElementById('send-btn');
+        if (sendBtn) sendBtn.disabled = true;
+
+        const successMsg = form.getAttribute('data-send-message') || "Mensaje enviado exitosamente";
+        const errorMsg = form.getAttribute('data-error-message') || "Ocurrió un error al enviar el mensaje";
+
+        const nameVal = document.getElementById('form-name').value;
+        const emailVal = document.getElementById('form-email').value;
+        const messageVal = document.getElementById('form-message').value;
+
+        // Asegurar que EmailJS esté listo antes del envío
+        if (typeof emailjs === 'undefined') {
+          openContactModal(false, errorMsg);
+          if (sendBtn) sendBtn.disabled = false;
+          return;
+        }
+
+        emailjs.send("service_mwy96o9", "template_lkgggnn", {
+          from_name: nameVal,
+          message: messageVal,
+          email_id: emailVal
+        })
+        .then(() => {
+          openContactModal(true, successMsg);
+          form.reset();
+        })
+        .catch((error) => {
+          openContactModal(false, errorMsg);
+          console.error("Error EmailJS:", error);
+        })
+        .finally(() => {
+          if (sendBtn) sendBtn.disabled = false;
+        });
+      });
+    }
+  })();
 </script>

@@ -54,29 +54,39 @@ const t = ui[currentLang] || ui.spanish;
     <!-- Columna Derecha: Tarjeta de Perfil -->
     <div class="relative flex justify-center items-center">
       <!-- Glow ambiental de fondo -->
-      <div class="absolute inset-0 bg-gradient-to-tr from-red-600 via-rose-500 to-purple-600 rounded-[2.5rem] blur-2xl opacity-50 animate-pulse"></div>
+      <div class="absolute inset-0 bg-gradient-to-tr from-red-600 via-rose-500 to-purple-600 rounded-[2.5rem] blur-2xl opacity-50 animate-pulse will-change-[opacity]"></div>
 
       <div class="relative p-2 bg-slate-900/90 border border-red-500/50 rounded-[2.5rem] backdrop-blur-xl shadow-[0_0_40px_rgba(220,38,38,0.25)] max-w-sm sm:max-w-md w-full">
         <div class="relative rounded-[2rem] overflow-hidden bg-slate-950 aspect-[4/4.5] flex items-center justify-center border border-red-500/20">
           
-          <!-- Capa 1 (Fondo): SVG tech ampliado con iluminación rosado neón -->
+          <!-- Capa 1 (Fondo): SVG tech (Añadido fetchpriority="high" para corregir la alerta de Lighthouse) -->
           <div class="absolute inset-0 flex items-center justify-center p-2 pointer-events-none z-0">
-            <img 
+            <img
               src="/icons/tech.svg" 
-              alt="Tech Icon Background" 
+              alt="" 
+              width="400"
+              height="400"
+              fetchpriority="high"
+              loading="eager"
+              decoding="async"
               class="w-full h-full object-contain tech-glow-rose opacity-95"
             />
           </div>
 
-          <!-- Capa 2 (Superpuesta): Imagen de perfil a color estática -->
+          <!-- Capa 2 (Foto de perfil) -->
           <img
             src="/profile/cabeto.webp"
             alt="Carlos de la Peña"
+            width="400"
+            height="450"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
             class="relative z-10 w-full h-full object-cover"
           />
           
-          <!-- Capa 3: Sombra de degradado inferior -->
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-15 pointer-events-none"></div>
+          <!-- Capa 3: Sombra de degradado inferior (Corregida clase inválida z-15 por z-10) -->
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10 pointer-events-none"></div>
           
           <!-- Capa 4: Badge de estado -->
           <div class="absolute bottom-5 left-5 right-5 p-3.5 rounded-xl bg-slate-900/80 border border-red-500/30 backdrop-blur-md flex items-center justify-between z-20">
@@ -95,7 +105,6 @@ const t = ui[currentLang] || ui.spanish;
 </section>
 
 <style>
-  /* Resplandor neón rosado con máxima intensidad en la palpitación */
   @keyframes roseTechPulse {
     0%, 100% {
       filter: drop-shadow(0 0 15px rgba(244, 63, 94, 0.85)) 
@@ -111,5 +120,12 @@ const t = ui[currentLang] || ui.spanish;
 
   .tech-glow-rose {
     animation: roseTechPulse 3s ease-in-out infinite;
+    will-change: transform, filter;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tech-glow-rose {
+      animation: none;
+    }
   }
 </style>
