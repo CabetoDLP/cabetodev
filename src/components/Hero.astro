@@ -53,27 +53,26 @@ const t = ui[currentLang] || ui.spanish;
 
     <!-- Columna Derecha: Tarjeta de Perfil -->
     <div class="relative flex justify-center items-center">
-      <!-- Glow ambiental de fondo -->
-      <div class="absolute inset-0 bg-gradient-to-tr from-red-600 via-rose-500 to-purple-600 rounded-[2.5rem] blur-2xl opacity-50"></div>
+      <!-- Glow ambiental de fondo (Ligero en mobile) -->
+      <div class="absolute inset-0 bg-gradient-to-tr from-red-600/40 via-rose-500/40 to-purple-600/40 rounded-[2.5rem] blur-xl opacity-60 pointer-events-none"></div>
 
-      <div class="relative p-2 bg-slate-900/90 border border-red-500/50 rounded-[2.5rem] backdrop-blur-xl shadow-[0_0_40px_rgba(220,38,38,0.25)] max-w-sm sm:max-w-md w-full">
+      <div class="relative p-2 bg-slate-900/90 border border-red-500/50 rounded-[2.5rem] backdrop-blur-xl shadow-[0_0_30px_rgba(220,38,38,0.2)] max-w-sm sm:max-w-md w-full">
         <div class="relative rounded-[2rem] overflow-hidden bg-slate-950 aspect-[4/4.5] flex items-center justify-center border border-red-500/20">
           
-          <!-- Capa 1 (Fondo Tech): Se elimina decoding="async" y la animación pesada en carga inicial -->
+          <!-- Capa 1 (Fondo Tech Decorative): Pasado a async y sin filtros drop-shadow costosos -->
           <div class="absolute inset-0 flex items-center justify-center p-2 pointer-events-none z-0">
             <img
               src="/icons/tech.svg" 
               alt="" 
               width="400"
               height="400"
-              fetchpriority="high"
-              loading="eager"
-              decoding="sync"
-              class="w-full h-full object-contain opacity-95 tech-glow-rose"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full object-contain opacity-80"
             />
           </div>
 
-          <!-- Capa 2 (Foto de perfil) -->
+          <!-- Capa 2 (Foto de perfil - ÚNICO ELEMENTO CRÍTICO LCP) -->
           <img
             src="/profile/cabeto.webp"
             alt="Carlos de la Peña"
@@ -103,10 +102,3 @@ const t = ui[currentLang] || ui.spanish;
 
   </div>
 </section>
-
-<style>
-  /* Se simplificó el resplandor a box-shadow/filter estático para no bloquear la renderización LCP */
-  .tech-glow-rose {
-    filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.85));
-  }
-</style>
