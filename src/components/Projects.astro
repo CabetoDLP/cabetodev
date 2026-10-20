@@ -322,26 +322,26 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const section = document.getElementById('projects');
-    const carouselRing = document.getElementById('carousel-ring');
-    const labels = JSON.parse(section?.getAttribute('data-labels') || '{}');
-    const cards = document.querySelectorAll('.project-card-3d');
+  // Ejecutamos la lógica para CADA sección de proyectos presente en el DOM (tanto la versión .only-es como .only-en)
+  const initProjectsSection = (section: HTMLElement) => {
+    const carouselRing = section.querySelector('#carousel-ring');
+    const labels = JSON.parse(section.getAttribute('data-labels') || '{}');
+    const cards = section.querySelectorAll('.project-card-3d');
     
-    // Elementos del popup Preview/Video
-    const hoverPreview = document.getElementById('hover-preview');
-    const hoverVideo = document.getElementById('hover-video') as HTMLVideoElement;
-    const hoverTitle = document.getElementById('hover-title');
-    const hoverSubtitle = document.getElementById('hover-subtitle');
-    const hoverTechs = document.getElementById('hover-techs');
-    const hoverBadgeDot = document.getElementById('hover-badge-dot');
+    // Buscar elementos DENTRO de esta sección específica, no a nivel global
+    const hoverPreview = section.querySelector('#hover-preview') as HTMLElement;
+    const hoverVideo = section.querySelector('#hover-video') as HTMLVideoElement;
+    const hoverTitle = section.querySelector('#hover-title');
+    const hoverSubtitle = section.querySelector('#hover-subtitle');
+    const hoverTechs = section.querySelector('#hover-techs');
+    const hoverBadgeDot = section.querySelector('#hover-badge-dot') as HTMLElement;
 
-    // Elementos del Modal
-    const modal = document.getElementById('project-modal');
-    const closeModalBtn = document.getElementById('close-modal');
-    const modalContent = document.getElementById('modal-content');
+    // Elementos del Modal DENTRO de esta sección
+    const modal = section.querySelector('#project-modal') as HTMLElement;
+    const closeModalBtn = section.querySelector('#close-modal');
+    const modalContent = section.querySelector('#modal-content');
 
-    let activeProjectData: any = null;
+    let currentProjData: any = null;
     let hideTimeout: NodeJS.Timeout;
 
     const openModalWithData = (projData: any) => {
@@ -395,33 +395,39 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
     };
 
     cards.forEach((card) => {
-      const projData = JSON.parse(card.getAttribute('data-project') || '{}');
-
       card.addEventListener('mouseenter', () => {
         clearTimeout(hideTimeout);
         carouselRing?.classList.add('paused');
-        activeProjectData = projData;
 
-        if (hoverTitle) hoverTitle.textContent = projData.title;
-        if (hoverSubtitle) hoverSubtitle.textContent = projData.subtitle;
-        if (hoverBadgeDot) hoverBadgeDot.style.backgroundColor = projData.color;
+        const rawData = card.getAttribute('data-project');
+        if (!rawData) return;
+
+        try {
+          currentProjData = JSON.parse(rawData);
+        } catch (e) {
+          return;
+        }
+
+        if (hoverTitle) hoverTitle.textContent = currentProjData.title;
+        if (hoverSubtitle) hoverSubtitle.textContent = currentProjData.subtitle;
+        if (hoverBadgeDot) hoverBadgeDot.style.backgroundColor = currentProjData.color;
 
         if (hoverPreview) {
-          hoverPreview.style.borderColor = projData.color;
+          hoverPreview.style.borderColor = currentProjData.color;
           hoverPreview.classList.remove('opacity-0', 'pointer-events-none', 'scale-90');
           hoverPreview.classList.add('opacity-100', 'scale-100', 'pointer-events-auto');
         }
 
-        if (hoverVideo && projData.video) {
-          if (hoverVideo.src !== window.location.origin + projData.video && !hoverVideo.src.endsWith(projData.video)) {
-            hoverVideo.src = projData.video;
+        if (hoverVideo && currentProjData.video) {
+          if (!hoverVideo.src.endsWith(currentProjData.video)) {
+            hoverVideo.src = currentProjData.video;
             hoverVideo.load();
           }
           hoverVideo.play().catch(() => {});
         }
 
         if (hoverTechs) {
-          hoverTechs.innerHTML = projData.techs.map((t: { name: string; icon: string }) => `
+          hoverTechs.innerHTML = currentProjData.techs.map((t: { name: string; icon: string }) => `
             <div class="w-7 h-7 p-1 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center" title="${t.name}">
               <img src="${t.icon}" alt="${t.name}" class="w-full h-full object-contain" />
             </div>
@@ -439,7 +445,17 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
           if (hoverVideo) {
             hoverVideo.pause();
           }
-        }, 150);
+        }, 200);
+      });
+
+      // Evento de clic en la tarjeta directamente
+      card.addEventListener('click', () => {
+        const rawData = card.getAttribute('data-project');
+        if (!rawData) return;
+        try {
+          const projData = JSON.parse(rawData);
+          openModalWithData(projData);
+        } catch (e) {}
       });
     });
 
@@ -458,12 +474,12 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
         if (hoverVideo) {
           hoverVideo.pause();
         }
-      }, 150);
+      }, 200);
     });
 
     hoverPreview?.addEventListener('click', () => {
-      if (activeProjectData) {
-        openModalWithData(activeProjectData);
+      if (currentProjData) {
+        openModalWithData(currentProjData);
       }
     });
 
@@ -476,5 +492,11 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
     modal?.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
     });
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Buscar TODAS las secciones de proyectos (ES y EN) e inicializar cada una por separado
+    const allProjectSections = document.querySelectorAll('#projects');
+    allProjectSections.forEach((sec) => initProjectsSection(sec as HTMLElement));
   });
 </script>
