@@ -12,6 +12,7 @@ const uiBase = {
     // Navegación
     aPresentationText: 'Presentación',
     aSkillsText: 'Habilidades',
+    aPerformanceText: 'Rendimiento',
     aExperienceText: 'Experiencia',
     aStudiesText: 'Formación',
     aProjectsText: 'Proyectos',
@@ -31,6 +32,19 @@ const uiBase = {
     // Skills
     skillsTitle: 'HABILIDADES TÉCNICAS',
     skillsText: 'Dominio de stack moderno web, bases de datos relacionales/NoSQL, patrones de diseño, arquitectura limpia y despliegue continuo en la nube.',
+
+    // Performance
+    perfBadge: "GARANTÍA LIGHTHOUSE 90+",
+    perfTitle: "RENDIMIENTO Y VELOCIDAD REAL",
+    perfDesc: "La velocidad no es un lujo, es una necesidad estratégica. Cada proyecto que desarrollo está construido sobre arquitecturas ultraligeras (Astro/Next.js), caché CDN en el borde y cero recursos que bloqueen el renderizado.",
+    perfB1Title: "Mayor Tasa de Conversión",
+    perfB1Desc: "La carga instantánea evita que los usuarios abandonen la web antes de ver tu oferta.",
+    perfB2Title: "Mejor Posicionamiento SEO",
+    perfB2Desc: "Google premia en búsquedas a las páginas con notas verdes en Core Web Vitals.",
+    perfB3Title: "Optimización Móvil Perfecta",
+    perfB3Desc: "Desempeño fluido e inmediato incluso en conexiones móviles 4G lentas.",
+    perfHeaderAudits: "// AUDITORÍAS REALES EN PRODUCCIÓN",
+    perfRunTest: "Probar Test",
 
     // Experience
     experienceTitle: 'EXPERIENCIA PROFESIONAL',
@@ -87,7 +101,7 @@ const uiBase = {
     s2Desc: "Refactorización completa del frontend para sitios en JavaScript/TypeScript (Astro, Next.js, React). Eliminación de scripts bloqueantes, optimización avanzada de assets e infraestructura.",
     s2Ideal: "Empresas o creadores con landing pages o sitios corporativos lentos que pierden clientes y posiciones en Google.",
     s2F1: "Auditoría inicial y reporte Before/After garantizado (Score 90+)",
-    s2F2: "Optimización y compresión extrema de imágenes (WebP/AVIF) y LCP",
+    s2F2: "Optimización y compresión extrema de imágenes (WebP) y LCP",
     s2F3: "Eliminación de CSS/JS innecesario y auto-hospedaje de fuentes",
     s2F4: "Configuración de Cloudflare CDN y reglas de caché agresivas (TTL de 1 año)",
     s2F5: "Optimización de Core Web Vitals (FCP, LCP, TBT, CLS)",
@@ -191,6 +205,9 @@ const uiBase = {
     faq5Q: '¿De quién es el sitio web, el código fuente y las bases de datos?',
     faq5A: 'El 100% de la propiedad, repositorios en GitHub, accesos a bases de datos y credenciales se transfieren a tu nombre una vez liquidado el 100% del pago acordado. Durante el desarrollo trabajamos en un entorno de pruebas propio. Una vez pagado, no hay ataduras ni dependencias obligatorias.',
 
+    faq6Q: "¿Incluye el servicio diseño de marca, logotipos o creación de recursos gráficos?",
+    faq6A: "No. El servicio se enfoca exclusivamente en el desarrollo web, maquetación e implementación técnica de código de alto rendimiento. Todas las imágenes, logotipos, tipografías, ilustraciones, videos y textos deben ser provistos por el cliente. Acepto recursos en cualquier formato (PNG, SVG, WEBP, MP4, etc.) para integrarlos optimizadamente en el sitio.",
+
     // Files / HV
     filesBadge: 'Credenciales & Trayectoria',
     filesTitle: '¿Quieres evaluar mi perfil completo?',
@@ -213,6 +230,7 @@ const uiBase = {
     // Navigation
     aPresentationText: 'Presentation',
     aSkillsText: 'Skills',
+    aPerformanceText: 'Performance',
     aExperienceText: 'Experience',
     aStudiesText: 'Education',
     aProjectsText: 'Projects',
@@ -232,6 +250,19 @@ const uiBase = {
     // Skills
     skillsTitle: 'TECHNICAL SKILLS',
     skillsText: 'Proficiency in modern web stacks, relational/NoSQL databases, design patterns, clean architecture, and continuous cloud deployment.',
+
+    // Performance
+    perfBadge: "LIGHTHOUSE 90+ GUARANTEED",
+    perfTitle: "PROVEN HIGH PERFORMANCE",
+    perfDesc: "Speed is not an afterthought—it is a core feature. Every project is engineered with modern clean architecture (Astro/Next.js), aggressive edge caching, and zero render-blocking assets.",
+    perfB1Title: "Higher Conversion Rates",
+    perfB1Desc: "Instant loading prevents user drop-off before seeing your core offer.",
+    perfB2Title: "Better Google SEO Ranking",
+    perfB2Desc: "Google prioritizes websites with green Core Web Vitals (LCP, FCP, CLS).",
+    perfB3Title: "100% Mobile Optimization",
+    perfB3Desc: "Flawless performance even on slow 4G mobile connections.",
+    perfHeaderAudits: "// REAL AUDITS IN PRODUCTION",
+    perfRunTest: "Run Test",
 
     // Experience
     experienceTitle: 'PROFESSIONAL EXPERIENCE',
@@ -288,7 +319,7 @@ const uiBase = {
     s2Desc: "Complete frontend refactoring for JavaScript/TypeScript web apps (Astro, Next.js, React). Elimination of blocking scripts, advanced asset optimization, and infrastructure tuning.",
     s2Ideal: "Businesses or founders with slow landing pages or corporate sites losing leads and Google rankings.",
     s2F1: "Initial audit & guaranteed Before/After report (90+ Score)",
-    s2F2: "Extreme image compression (WebP/AVIF) & LCP optimization",
+    s2F2: "Extreme image compression (WebP) & LCP optimization",
     s2F3: "Removal of render-blocking CSS/JS and self-hosted fonts",
     s2F4: "Cloudflare CDN setup & aggressive caching rules (1-year TTL)",
     s2F5: "Core Web Vitals optimization (FCP, LCP, TBT, CLS)",
@@ -391,6 +422,9 @@ const uiBase = {
     faq5Q: 'Who owns the website, source code, and databases?',
     faq5A: '100% ownership, GitHub repositories, database credentials, and access are transferred under your name once 100% of the agreed payment is settled. During development, we host on our staging environment. Once paid, zero vendor lock-in.',
 
+    faq6Q: "Does the service include branding, logo, or graphic design creation?",
+    faq6A: "No. The service focuses strictly on high-performance web development, layout, and code implementation. All brand assets, logos, fonts, images, illustrations, videos, and copy must be provided by the client. I accept assets in any standard format (PNG, SVG, WEBP, MP4, etc.) to integrate and optimize them into the site.",
+    
     // Files / CV
     filesBadge: 'Credentials & Track Record',
     filesTitle: 'Want to review my full profile?',

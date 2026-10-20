@@ -1,0 +1,224 @@
+---
+import { languages, ui } from '../language/ui';
+
+interface Props {
+  lang?: keyof typeof languages | keyof typeof ui;
+}
+
+const { lang = 'spanish' } = Astro.props;
+const currentLang = (lang === 'es' ? 'spanish' : lang === 'en' ? 'english' : lang) as 'spanish' | 'english';
+const isEn = currentLang === 'english';
+const t = ui[currentLang] || ui.spanish;
+
+const benchmarks = [
+  {
+    id: 'cabetodev',
+    title: 'Cabeto.dev',
+    subtitle: isEn ? 'Developer Portfolio & Agency' : 'Portafolio de Desarrollo & Agencia',
+    url: 'https://cabeto.dev',
+    image: '/benchmarks/cabetodev-pagespeed.webp',
+    pageSpeedUrl: 'https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fcabeto.dev',
+    scores: { perf: 93, access: 96, best: 100, seo: 100 },
+    color: '#EF4444'
+  },
+  {
+    id: 'rocaire',
+    title: 'Rocaire Constructora',
+    subtitle: isEn ? 'Corporate Web Platform' : 'Plataforma Web Corporativa',
+    url: 'https://www.rocaireconstructora.com/',
+    image: '/benchmarks/rocaire-pagespeed.webp',
+    pageSpeedUrl: 'https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fwww.rocaireconstructora.com%2F',
+    scores: { perf: 99, access: 93, best: 100, seo: 100 },
+    color: '#F59E0B'
+  },
+  {
+    id: 'cabetoart',
+    title: 'Cabeto.Art',
+    subtitle: isEn ? 'Digital Art Portfolio & Commission Hub' : 'Portafolio de Arte Digital & Comisiones',
+    url: 'https://cabetoart.onrender.com',
+    image: '/benchmarks/cabetoart-pagespeed.webp',
+    pageSpeedUrl: 'https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fcabetoart.onrender.com',
+    scores: { perf: 97, access: 92, best: 100, seo: 100 },
+    color: '#06B6D4'
+  }
+];
+---
+
+<section id="performance" class="relative py-20 px-4 sm:px-6 max-w-7xl mx-auto overflow-hidden">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    
+    <!-- COLUMNA IZQUIERDA: Texto Persuasivo & Beneficios desde ui.ts -->
+    <div class="lg:col-span-5 flex flex-col items-start gap-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/60 border border-red-500/40 text-red-400 text-xs font-mono tracking-widest uppercase shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]"></span>
+        {t.perfBadge}
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+        <span class="text-red-500">//</span> {t.perfTitle}
+      </h2>
+
+      <p class="text-slate-300 text-base leading-relaxed">
+        {t.perfDesc}
+      </p>
+
+      <!-- Beneficios Clave en Negocio -->
+      <div class="space-y-3.5 w-full pt-2">
+        <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+          <span class="text-red-500 font-bold mt-0.5">🚀</span>
+          <div>
+            <h4 class="text-xs font-bold text-white uppercase font-mono">{t.perfB1Title}</h4>
+            <p class="text-xs text-slate-400 mt-0.5">{t.perfB1Desc}</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+          <span class="text-red-500 font-bold mt-0.5">📈</span>
+          <div>
+            <h4 class="text-xs font-bold text-white uppercase font-mono">{t.perfB2Title}</h4>
+            <p class="text-xs text-slate-400 mt-0.5">{t.perfB2Desc}</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+          <span class="text-red-500 font-bold mt-0.5">🛡️</span>
+          <div>
+            <h4 class="text-xs font-bold text-white uppercase font-mono">{t.perfB3Title}</h4>
+            <p class="text-xs text-slate-400 mt-0.5">{t.perfB3Desc}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUMNA DERECHA: Carrusel / Slider de Tarjetas con Capturas de PageSpeed -->
+    <div class="lg:col-span-7 relative w-full">
+      <!-- Controls / Navigation Header -->
+      <div class="flex items-center justify-between mb-4 px-1">
+        <span class="text-xs font-mono text-slate-400">
+          {t.perfHeaderAudits}
+        </span>
+        
+        <div class="flex items-center gap-2">
+          <button 
+            id="perf-prev-btn" 
+            class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-red-500/50 transition-all active:scale-95"
+            aria-label="Previous Benchmark"
+          >
+            ←
+          </button>
+          <button 
+            id="perf-next-btn" 
+            class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-red-500/50 transition-all active:scale-95"
+            aria-label="Next Benchmark"
+          >
+            →
+          </button>
+        </div>
+      </div>
+
+      <!-- Contenedor Deslizable de Tarjetas -->
+      <div 
+        id="perf-slider" 
+        class="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 scroll-smooth"
+      >
+        {benchmarks.map((item) => (
+          <div 
+            class="snap-center shrink-0 w-full sm:w-[500px] rounded-2xl bg-slate-950/90 border p-5 sm:p-6 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col justify-between"
+            style={`border-color: ${item.color}40;`}
+          >
+            <!-- Encabezado de la Tarjeta -->
+            <div class="flex items-start justify-between gap-3 mb-4">
+              <div>
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full border uppercase" style={`color: ${item.color}; background-color: ${item.color}15; border-color: ${item.color}40;`}>
+                  {item.subtitle}
+                </span>
+                <h3 class="text-xl font-bold text-white mt-1.5">{item.title}</h3>
+              </div>
+
+              <a 
+                href={item.pageSpeedUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="px-3.5 py-1.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold font-mono shadow-[0_0_15px_rgba(220,38,38,0.4)] transition-all shrink-0 flex items-center gap-1.5 active:scale-95"
+              >
+                <span>{t.perfRunTest}</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+
+            <!-- Previsualización de Captura de PageSpeed -->
+            <div class="relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-slate-900 border border-slate-800/80 mb-4 group">
+              <img 
+                src={item.image} 
+                alt={`Google PageSpeed Insights para ${item.title}`} 
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+
+            <!-- Los 4 Puntajes Resumidos -->
+            <div class="grid grid-cols-4 gap-2 p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
+              <div>
+                <div class="text-base sm:text-lg font-black text-emerald-400">{item.scores.perf}</div>
+                <div class="text-[9px] font-mono text-slate-400 uppercase">Perf</div>
+              </div>
+              <div>
+                <div class="text-base sm:text-lg font-black text-emerald-400">{item.scores.access}</div>
+                <div class="text-[9px] font-mono text-slate-400 uppercase">Access</div>
+              </div>
+              <div>
+                <div class="text-base sm:text-lg font-black text-emerald-400">{item.scores.best}</div>
+                <div class="text-[9px] font-mono text-slate-400 uppercase">Best</div>
+              </div>
+              <div>
+                <div class="text-base sm:text-lg font-black text-emerald-400">{item.scores.seo}</div>
+                <div class="text-[9px] font-mono text-slate-400 uppercase">SEO</div>
+              </div>
+            </div>
+
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Ocultar barra de scroll estándar en el slider para mayor elegancia visual */
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const initPerfSlider = (section: HTMLElement) => {
+      const slider = section.querySelector('#perf-slider');
+      const prevBtn = section.querySelector('#perf-prev-btn');
+      const nextBtn = section.querySelector('#perf-next-btn');
+
+      if (!slider) return;
+
+      prevBtn?.addEventListener('click', () => {
+        slider.scrollBy({ left: -400, behavior: 'smooth' });
+      });
+
+      nextBtn?.addEventListener('click', () => {
+        slider.scrollBy({ left: 400, behavior: 'smooth' });
+      });
+    };
+
+    // Inicializar de forma aislada para ambas instancias (ES y EN)
+    const sections = document.querySelectorAll('#performance');
+    sections.forEach((sec) => initPerfSlider(sec as HTMLElement));
+  });
+</script>
