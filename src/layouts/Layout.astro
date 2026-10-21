@@ -1,5 +1,4 @@
 ---
-// src/layouts/Layout.astro
 import '@fontsource-variable/plus-jakarta-sans';
 import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/600.css';
@@ -67,11 +66,6 @@ const jsonLdWebSite = {
     <link rel="canonical" href={siteUrl} />
     <meta name="robots" content="index, follow" />
 
-    <!-- SEO Bilingüe (hreflang) -->
-    <link rel="alternate" hreflang="es" href={siteUrl} />
-    <link rel="alternate" hreflang="en" href={siteUrl} />
-    <link rel="alternate" hreflang="x-default" href={siteUrl} />
-
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={siteUrl} />
@@ -98,7 +92,6 @@ const jsonLdWebSite = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLdPerson)} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLdWebSite)} />
 
-    {/* Google Analytics GA4 */}
     {gaId && (
       <>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
@@ -106,7 +99,6 @@ const jsonLdWebSite = {
           window.dataLayer = window.dataLayer || [];
           function gtag(){ dataLayer.push(arguments); }
           gtag('js', new Date());
-
           gtag('config', gaId);
         </script>
       </>
