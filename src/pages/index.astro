@@ -18,13 +18,12 @@ import Contact from '../components/Contact.astro';
   lang="es"
 >
   <style>
-    /* Control dinámico de idioma por CSS ultra rápido */
-    html[lang="es"] .only-en { display: none !important; }
-    html[lang="en"] .only-es { display: none !important; }
+    /* Control dinámico de idioma por atributo en el contenedor raíz */
+    html[lang="es"] [data-lang="en"] { display: none !important; }
+    html[lang="en"] [data-lang="es"] { display: none !important; }
   </style>
 
   <script is:inline>
-    // Diccionario de SEO dinámico para la misma página
     const seoMeta = {
       es: {
         title: "CabetoDev | Ingeniero De Sistemas y Desarrollador Full Stack",
@@ -40,7 +39,6 @@ import Contact from '../components/Contact.astro';
       localStorage.setItem('preferred_lang', lang);
       document.documentElement.lang = lang;
 
-      // 1. Actualizar SEO dinámicamente (Título y Meta Descripción)
       const meta = seoMeta[lang] || seoMeta.es;
       document.title = meta.title;
       const metaDesc = document.querySelector('meta[name="description"]');
@@ -48,7 +46,6 @@ import Contact from '../components/Contact.astro';
         metaDesc.setAttribute('content', meta.description);
       }
 
-      // 2. Actualizar estados visuales de los botones del Navbar
       const btnsEs = document.querySelectorAll('.btn-lang-es');
       const btnsEn = document.querySelectorAll('.btn-lang-en');
 
@@ -61,7 +58,7 @@ import Contact from '../components/Contact.astro';
       }
     };
 
-    // Interceptor global de scroll para los índices del Navbar
+    // Interceptor global de scroll
     document.addEventListener('click', (e) => {
       const link = e.target.closest('a');
       if (!link) return;
@@ -70,17 +67,9 @@ import Contact from '../components/Contact.astro';
       if (href && href.startsWith('#') && href.length > 1) {
         e.preventDefault();
         const targetId = href.substring(1);
-        
-        const currentLang = document.documentElement.lang || 'es';
-        const activeContainer = currentLang === 'en' 
-          ? document.querySelector('.only-en') 
-          : document.querySelector('.only-es');
-
-        if (activeContainer) {
-          const targetElement = activeContainer.querySelector('#' + targetId);
-          if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
     });
@@ -98,8 +87,8 @@ import Contact from '../components/Contact.astro';
     });
   </script>
 
-  <!-- BLOQUE EN ESPAÑOL -->
-  <div class="only-es">
+  <!-- BLOQUE ÚNICO EN ESPAÑOL -->
+  <div data-lang="es">
     <Navbar lang="es" />
     <main class="pt-16">
       <Hero lang="es" />
@@ -114,8 +103,8 @@ import Contact from '../components/Contact.astro';
     </main>
   </div>
 
-  <!-- BLOQUE EN INGLÉS -->
-  <div class="only-en">
+  <!-- BLOQUE ÚNICO EN INGLÉS -->
+  <div data-lang="en">
     <Navbar lang="en" />
     <main class="pt-16">
       <Hero lang="en" />
