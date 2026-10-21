@@ -106,7 +106,7 @@ const jsonLdWebSite = {
   </head>
   
   <body class="bg-slate-950 text-white font-sans min-h-screen relative overflow-x-hidden selection:bg-red-500 selection:text-white">
-    <!-- Capas de fondo y ambientación -->
+    <!-- Capas de fondo y ambientación con renderizado optimizado -->
     <div class="fixed inset-0 bg-[linear-gradient(to_right,#1f293750_1px,transparent_1px),linear-gradient(to_bottom,#1f293750_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_50%_80%_at_50%_50%,#000_85%,transparent_100%)] pointer-events-none z-0"></div>
     <div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/20 rounded-full blur-[140px] pointer-events-none z-0"></div>
     <div class="fixed bottom-10 right-10 w-[350px] h-[350px] bg-purple-600/15 rounded-full blur-[120px] pointer-events-none z-0"></div>
@@ -132,10 +132,12 @@ const jsonLdWebSite = {
 
   body {
     font-family: var(--font-body);
+    font-display: swap;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    font-display: swap;
   }
 
   /* Control dinámico de idioma por CSS */

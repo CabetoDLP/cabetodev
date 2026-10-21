@@ -213,14 +213,22 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
             `}
             data-project={JSON.stringify(proj)}
           >
-            <!-- ESTADO NORMAL: Icono + Nombre + Subtítulo -->
+            <!-- ESTADO NORMAL: Icono + Nombre + Subtítulo con Lazy Loading -->
             <div class="w-full h-full p-4 flex flex-col items-center justify-between text-center pointer-events-none">
               <span class="text-[9px] font-mono px-2 py-0.5 rounded-full border uppercase line-clamp-1" style={`color: ${proj.color}; background-color: ${proj.color}15; border-color: ${proj.color}40;`}>
                 {proj.subtitle}
               </span>
 
               <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center my-auto">
-                <img src={proj.icon} alt={proj.title} class="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]" />
+                <img 
+                  src={proj.icon} 
+                  alt={proj.title} 
+                  width="64"
+                  height="64"
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]" 
+                />
               </div>
 
               <h3 class="text-xs sm:text-sm font-bold text-white line-clamp-1">
@@ -232,7 +240,7 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
       })}
     </div>
 
-    <!-- POPUP HOVER / PREVIEW DEL VIDEO (Aumentado de Tamaño) -->
+    <!-- POPUP HOVER / PREVIEW DEL VIDEO (Optimizado con preload="none") -->
     <div 
       id="hover-preview"
       class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] sm:w-[540px] md:w-[620px] rounded-2xl bg-slate-950 border-2 border-red-500/50 overflow-hidden opacity-0 scale-90 pointer-events-none transition-all duration-300 z-40 shadow-[0_20px_60px_rgba(0,0,0,0.95)] cursor-pointer"
@@ -243,7 +251,7 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
           muted
           loop
           playsinline
-          preload="auto"
+          preload="none"
           class="w-full h-full object-cover opacity-95"
         ></video>
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
@@ -302,6 +310,7 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
   .carousel-card {
     backface-visibility: visible;
     transform-style: preserve-3d;
+    will-change: transform;
   }
 
   @keyframes rotateCarouselCW {
@@ -322,13 +331,11 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
 </style>
 
 <script>
-  // Ejecutamos la lógica para CADA sección de proyectos presente en el DOM (tanto la versión .only-es como .only-en)
   const initProjectsSection = (section: HTMLElement) => {
     const carouselRing = section.querySelector('#carousel-ring');
     const labels = JSON.parse(section.getAttribute('data-labels') || '{}');
     const cards = section.querySelectorAll('.project-card-3d');
     
-    // Buscar elementos DENTRO de esta sección específica, no a nivel global
     const hoverPreview = section.querySelector('#hover-preview') as HTMLElement;
     const hoverVideo = section.querySelector('#hover-video') as HTMLVideoElement;
     const hoverTitle = section.querySelector('#hover-title');
@@ -336,7 +343,6 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
     const hoverTechs = section.querySelector('#hover-techs');
     const hoverBadgeDot = section.querySelector('#hover-badge-dot') as HTMLElement;
 
-    // Elementos del Modal DENTRO de esta sección
     const modal = section.querySelector('#project-modal') as HTMLElement;
     const closeModalBtn = section.querySelector('#close-modal');
     const modalContent = section.querySelector('#modal-content');
@@ -372,7 +378,7 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
             <div class="flex flex-wrap gap-2 w-full">
               ${projData.techs.map((t: { name: string; icon: string }) => `
                 <div class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-200 shrink-0">
-                  <img src="${t.icon}" alt="${t.name}" class="w-4 h-4 object-contain" />
+                  <img src="${t.icon}" alt="${t.name}" width="16" height="16" loading="lazy" decoding="async" class="w-4 h-4 object-contain" />
                   <span>${t.name}</span>
                 </div>
               `).join('')}
@@ -429,7 +435,7 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
         if (hoverTechs) {
           hoverTechs.innerHTML = currentProjData.techs.map((t: { name: string; icon: string }) => `
             <div class="w-7 h-7 p-1 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center" title="${t.name}">
-              <img src="${t.icon}" alt="${t.name}" class="w-full h-full object-contain" />
+              <img src="${t.icon}" alt="${t.name}" width="20" height="20" loading="lazy" decoding="async" class="w-full h-full object-contain" />
             </div>
           `).join('');
         }
@@ -448,7 +454,6 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
         }, 200);
       });
 
-      // Evento de clic en la tarjeta directamente
       card.addEventListener('click', () => {
         const rawData = card.getAttribute('data-project');
         if (!rawData) return;
@@ -495,7 +500,6 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
   };
 
   document.addEventListener('DOMContentLoaded', () => {
-    // Buscar TODAS las secciones de proyectos (ES y EN) e inicializar cada una por separado
     const allProjectSections = document.querySelectorAll('#projects');
     allProjectSections.forEach((sec) => initProjectsSection(sec as HTMLElement));
   });
