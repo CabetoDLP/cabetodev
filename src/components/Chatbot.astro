@@ -127,7 +127,7 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
     const welcomeMsg = document.getElementById('bot-welcome-msg');
 
     const API_KEY = chatWindow?.dataset.apiKey || '';
-    const MODELS = ['gemini-2.5-flash', 'gemini-1.5-flash'];
+    const MODELS = ['gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-2.5-flash'];
 
     function getCurrentLang() {
       return document.documentElement.lang === 'en' ? 'en' : 'es';
@@ -333,7 +333,7 @@ const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
                 ],
                 generationConfig: {
                   temperature: 0.7,
-                  maxOutputTokens: 400
+                  maxOutputTokens: 800
                 }
               })
             }
