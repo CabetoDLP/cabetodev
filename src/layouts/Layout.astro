@@ -4,11 +4,11 @@ import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/600.css';
 import '@fontsource/space-grotesk/700.css';
 
-// Importación de archivos .woff2 para precarga dinámica en la compilación
 import plusJakartaWoff2 from '@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2';
 import spaceGrotesk600Woff2 from '@fontsource/space-grotesk/files/space-grotesk-latin-600-normal.woff2';
 import spaceGrotesk700Woff2 from '@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2';
 
+import cabetoImg from '../assets/profile/cabeto.webp';
 import Chatbot from '../components/Chatbot.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 
@@ -29,7 +29,6 @@ const {
 const siteUrl = 'https://cabeto.dev';
 const currentLang = (lang === 'en' || lang === 'english') ? 'en' : 'es';
 
-// Schema JSON-LD de Persona / Desarrollador
 const jsonLdPerson = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -69,8 +68,8 @@ const jsonLdWebSite = {
     <link rel="preload" href={spaceGrotesk600Woff2} as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href={spaceGrotesk700Woff2} as="font" type="font/woff2" crossorigin="anonymous" />
 
-    <!-- PRECARGA DE IMAGEN LCP DESDE PUBLIC/ (Máxima calidad y prioridad inmediata) -->
-    <link rel="preload" href="/profile/cabeto.webp" as="image" type="image/webp" fetchpriority="high" />
+    <!-- PRECARGA DE IMAGEN LCP OPTIMIZADA POR ASTRO -->
+    <link rel="preload" href={cabetoImg.src} as="image" type="image/webp" fetchpriority="high" />
 
     <!-- SEO Principal -->
     <title>{title}</title>

@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import cabetoImg from '../assets/profile/cabeto.webp';
 import { languages, ui } from '../language/ui';
 
 interface Props {
@@ -22,7 +24,7 @@ const t = ui[currentLang] || ui.spanish;
 
       <h1 class="text-4xl sm:text-5xl xl:text-6xl font-black tracking-tight uppercase leading-none">
         {t.heroFirstName} <br />
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-purple-500 drop-shadow-[0_0_25px_rgba(244,63,94,0.6)]">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-purple-500 sm:drop-shadow-[0_0_25px_rgba(244,63,94,0.6)]">
           {t.heroLastName}
         </span> <br />
         <span class="text-transparent [-webkit-text-stroke:1.5px_#f43f5e] opacity-90">
@@ -53,10 +55,10 @@ const t = ui[currentLang] || ui.spanish;
 
     <!-- Columna Derecha: Tarjeta de Perfil -->
     <div class="relative flex justify-center items-center">
-      <!-- Glow ambiental de fondo (desactivado blur excesivo en mobile para no sobrecargar el renderizado GPU) -->
+      <!-- Glow ambiental de fondo (desactivado blur excesivo en mobile) -->
       <div class="absolute inset-0 bg-gradient-to-tr from-red-600/40 via-rose-500/40 to-purple-600/40 rounded-[2.5rem] blur-xl opacity-60 pointer-events-none hidden sm:block"></div>
 
-      <div class="relative p-2 bg-slate-900/95 sm:backdrop-blur-xl border border-red-500/50 rounded-[2.5rem] shadow-[0_0_30px_rgba(220,38,38,0.2)] max-w-sm sm:max-w-md w-full">
+      <div class="relative p-2 bg-slate-900 border border-red-500/40 rounded-[2.5rem] sm:bg-slate-900/95 sm:backdrop-blur-xl sm:shadow-[0_0_30px_rgba(220,38,38,0.2)] max-w-sm sm:max-w-md w-full">
         <div class="relative rounded-[2rem] overflow-hidden bg-slate-950 aspect-[4/4.5] flex items-center justify-center border border-red-500/20">
           
           <!-- Capa 1: Fondo Tech Decorative -->
@@ -72,12 +74,14 @@ const t = ui[currentLang] || ui.spanish;
             />
           </div>
 
-          <!-- Capa 2: Foto de perfil desde public/ (Máxima calidad de origen) -->
-          <img
-            src="/profile/cabeto.webp"
+          <!-- Capa 2: Foto de perfil optimizada dinámicamente -->
+          <Image
+            src={cabetoImg}
             alt="Carlos de la Peña"
-            width="400"
-            height="450"
+            width={400}
+            height={450}
+            widths={[280, 340, 400]}
+            sizes="(max-width: 640px) 280px, 400px"
             loading="eager"
             fetchpriority="high"
             decoding="async"
