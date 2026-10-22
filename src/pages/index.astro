@@ -19,8 +19,8 @@ import Contact from '../components/Contact.astro';
 >
   <style>
     /* Control dinámico de idioma por atributo en el contenedor raíz */
-    html[lang="es"] [data-lang="en"] { display: none !important; }
-    html[lang="en"] [data-lang="es"] { display: none !important; }
+    html[lang="es"] [data-lang="en"] { display: none !important; content-visibility: hidden !important;}
+    html[lang="en"] [data-lang="es"] { display: none !important; content-visibility: hidden !important;}
   </style>
 
   <script is:inline>
