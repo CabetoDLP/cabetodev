@@ -7,14 +7,10 @@ interface Props {
 
 const { lang = 'spanish' } = Astro.props;
 const currentLang = (lang === 'es' ? 'spanish' : lang === 'en' ? 'english' : lang) as 'spanish' | 'english';
-const t = ui[currentLang] || ui.spanish;
 
 const isEnglish = currentLang === 'english';
-
-// Tu número de WhatsApp Business con código de país (Colombia: 57)
 const businessPhone = "573169209202";
 
-// Mensaje predeterminado según el idioma de la página
 const defaultMessage = isEnglish
   ? "Hi Carlos! I visited your portfolio and I'm interested in your development services. Let's talk!"
   : "¡Hola Carlos! Visité tu portafolio y me interesa conocer más sobre tus servicios de desarrollo. ¡Hablemos!";

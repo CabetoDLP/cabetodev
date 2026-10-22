@@ -331,7 +331,7 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
 </style>
 
 <script>
-  // Inicialización optimizada sin bloquear el hilo principal de renderizado
+  // Aislamiento total: se ejecuta asíncronamente solo cuando el motor del navegador está totalmente libre
   const initProjectsSection = (section: HTMLElement) => {
     const carouselRing = section.querySelector('#carousel-ring');
     const labels = JSON.parse(section.getAttribute('data-labels') || '{}');
@@ -500,15 +500,9 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
     });
   };
 
-  // Carga diferida usando requestIdleCallback para no competir con el LCP ni el renderizado inicial
-  const initAllProjects = () => {
+  // Usar setTimeout con delay 0 desvincula la ejecución del ciclo de renderizado crítico del LCP
+  setTimeout(() => {
     const allProjectSections = document.querySelectorAll('#projects');
     allProjectSections.forEach((sec) => initProjectsSection(sec as HTMLElement));
-  };
-
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => initAllProjects());
-  } else {
-    window.addEventListener('DOMContentLoaded', initAllProjects);
-  }
+  }, 300);
 </script>
