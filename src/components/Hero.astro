@@ -74,14 +74,14 @@ const t = ui[currentLang] || ui.spanish;
             />
           </div>
 
-          <!-- Capa 2: Foto de perfil optimizada con Astro Assets (LCP crítico) -->
+          <!-- Capa 2: Foto de perfil optimizada con Astro Assets (LCP crítico ajustado para móviles) -->
           <Image
             src={cabetoImg}
             alt="Carlos de la Peña"
             width={400}
             height={450}
-            widths={[280, 400, 600]}
-            sizes="(max-width: 640px) 280px, 400px"
+            widths={[340, 400, 600]}
+            sizes="(max-width: 640px) 340px, 400px"
             loading="eager"
             fetchpriority="high"
             decoding="async"
