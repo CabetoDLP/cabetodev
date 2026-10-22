@@ -331,6 +331,7 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
 </style>
 
 <script>
+  // Inicialización optimizada sin bloquear el hilo principal de renderizado
   const initProjectsSection = (section: HTMLElement) => {
     const carouselRing = section.querySelector('#carousel-ring');
     const labels = JSON.parse(section.getAttribute('data-labels') || '{}');
@@ -499,8 +500,15 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
     });
   };
 
-  document.addEventListener('DOMContentLoaded', () => {
+  // Carga diferida usando requestIdleCallback para no competir con el LCP ni el renderizado inicial
+  const initAllProjects = () => {
     const allProjectSections = document.querySelectorAll('#projects');
     allProjectSections.forEach((sec) => initProjectsSection(sec as HTMLElement));
-  });
+  };
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => initAllProjects());
+  } else {
+    window.addEventListener('DOMContentLoaded', initAllProjects);
+  }
 </script>

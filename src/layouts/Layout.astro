@@ -3,6 +3,13 @@ import '@fontsource-variable/plus-jakarta-sans';
 import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/600.css';
 import '@fontsource/space-grotesk/700.css';
+
+// Importación de archivos .woff2 para precarga dinámica en la compilación
+import plusJakartaWoff2 from '@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2';
+import spaceGrotesk600Woff2 from '@fontsource/space-grotesk/files/space-grotesk-latin-600-normal.woff2';
+import spaceGrotesk700Woff2 from '@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2';
+
+import cabetoImg from '../assets/profile/cabeto.webp';
 import Chatbot from '../components/Chatbot.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 
@@ -23,7 +30,7 @@ const {
 const siteUrl = 'https://cabeto.dev';
 const currentLang = (lang === 'en' || lang === 'english') ? 'en' : 'es';
 
-// Schema JSON-LD de Persona / Desarrollador para motores de búsqueda
+// Schema JSON-LD de Persona / Desarrollador
 const jsonLdPerson = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -57,7 +64,15 @@ const jsonLdWebSite = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
+    <!-- PRECARGA DINÁMICA DE FUENTES CRÍTICAS (Rompe la cadena de solicitudes) -->
+    <link rel="preload" href={plusJakartaWoff2} as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href={spaceGrotesk600Woff2} as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href={spaceGrotesk700Woff2} as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <!-- PRECARGA DE IMAGEN LCP (Garantiza el primer renderizado rápido) -->
+    <link rel="preload" href={cabetoImg.src} as="image" type="image/webp" fetchpriority="high" />
+
     <!-- SEO Principal -->
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -140,7 +155,16 @@ const jsonLdWebSite = {
     font-display: swap;
   }
 
-  /* Control dinámico de idioma por CSS */
-  html[lang="es"] .only-en { display: none !important; }
-  html[lang="en"] .only-es { display: none !important; }
+  /* Control dinámico de idioma por CSS con aislamiento de renderizado */
+  html[lang="es"] .only-en,
+  html[lang="es"] [data-lang="en"] { 
+    display: none !important; 
+    content-visibility: hidden !important;
+  }
+
+  html[lang="en"] .only-es,
+  html[lang="en"] [data-lang="es"] { 
+    display: none !important; 
+    content-visibility: hidden !important;
+  }
 </style>
