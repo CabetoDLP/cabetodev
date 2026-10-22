@@ -9,7 +9,6 @@ import plusJakartaWoff2 from '@fontsource-variable/plus-jakarta-sans/files/plus-
 import spaceGrotesk600Woff2 from '@fontsource/space-grotesk/files/space-grotesk-latin-600-normal.woff2';
 import spaceGrotesk700Woff2 from '@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2';
 
-import cabetoImg from '../assets/profile/cabeto.webp';
 import Chatbot from '../components/Chatbot.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 
@@ -65,13 +64,13 @@ const jsonLdWebSite = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- PRECARGA DINÁMICA DE FUENTES CRÍTICAS (Rompe la cadena de solicitudes) -->
+    <!-- PRECARGA DINÁMICA DE FUENTES CRÍTICAS -->
     <link rel="preload" href={plusJakartaWoff2} as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href={spaceGrotesk600Woff2} as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href={spaceGrotesk700Woff2} as="font" type="font/woff2" crossorigin="anonymous" />
 
-    <!-- PRECARGA DE IMAGEN LCP (Garantiza el primer renderizado rápido) -->
-    <link rel="preload" href={cabetoImg.src} as="image" type="image/webp" fetchpriority="high" />
+    <!-- PRECARGA DE IMAGEN LCP DESDE PUBLIC/ (Máxima calidad y prioridad inmediata) -->
+    <link rel="preload" href="/profile/cabeto.webp" as="image" type="image/webp" fetchpriority="high" />
 
     <!-- SEO Principal -->
     <title>{title}</title>

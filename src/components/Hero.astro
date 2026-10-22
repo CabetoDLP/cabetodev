@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import cabetoImg from '../assets/profile/cabeto.webp';
 import { languages, ui } from '../language/ui';
 
 interface Props {
@@ -74,14 +72,12 @@ const t = ui[currentLang] || ui.spanish;
             />
           </div>
 
-          <!-- Capa 2: Foto de perfil optimizada con Astro Assets (LCP crítico ajustado para móviles) -->
-          <Image
-            src={cabetoImg}
+          <!-- Capa 2: Foto de perfil desde public/ (Máxima calidad de origen) -->
+          <img
+            src="/profile/cabeto.webp"
             alt="Carlos de la Peña"
-            width={400}
-            height={450}
-            widths={[340, 400, 600]}
-            sizes="(max-width: 640px) 340px, 400px"
+            width="400"
+            height="450"
             loading="eager"
             fetchpriority="high"
             decoding="async"
