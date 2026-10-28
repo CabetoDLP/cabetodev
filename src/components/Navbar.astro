@@ -8,12 +8,13 @@ interface Props {
 const { lang = 'spanish' } = Astro.props;
 const currentLang = (lang === 'es' ? 'spanish' : lang === 'en' ? 'english' : lang) as 'spanish' | 'english';
 const t = ui[currentLang] || ui.spanish;
+const isEn = currentLang === 'english';
 ---
 
 <header class="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 py-3.5 backdrop-blur-md bg-slate-950/80 border-b border-red-500/20">
   <div class="max-w-7xl mx-auto flex items-center justify-between lg:justify-center gap-4 lg:gap-6 xl:gap-8">
     
-    <!-- Logo & Nombre (Pegado hacia los índices desde la izquierda) -->
+    <!-- Logo & Nombre -->
     <a 
       href="#" 
       onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" 
@@ -29,7 +30,7 @@ const t = ui[currentLang] || ui.spanish;
       </span>
     </a>
 
-    <!-- Navegación Central: Todos los 9 ítems visibles y compactos -->
+    <!-- Navegación Central -->
     <nav class="hidden lg:flex items-center gap-2.5 xl:gap-4 2xl:gap-5 text-[11px] xl:text-xs 2xl:text-sm font-mono tracking-tight xl:tracking-wider uppercase text-slate-300 whitespace-nowrap">
       <a href="#presentation" class="hover:text-red-400 transition-colors">{t.aPresentationText}</a>
       <a href="#services" class="hover:text-red-400 transition-colors">{t.aServicesText}</a>
@@ -42,7 +43,7 @@ const t = ui[currentLang] || ui.spanish;
       <a href="#contact" class="hover:text-red-400 transition-colors">{t.aContactText}</a>
     </nav>
 
-    <!-- Contenedor Derecho (Pegado hacia los índices desde la derecha) -->
+    <!-- Contenedor Derecho -->
     <div class="flex items-center gap-2.5 xl:gap-3 shrink-0">
       <!-- Selector de Idioma -->
       <div class="flex items-center bg-slate-900 border border-red-500/30 rounded-lg p-0.5 text-xs font-mono">
@@ -64,7 +65,7 @@ const t = ui[currentLang] || ui.spanish;
 
       <!-- Botón Contacto -->
       <a
-        href="#contact"
+        href={`#contact`}
         class="hidden sm:inline-block px-3.5 xl:px-4 py-1.5 rounded-lg font-mono text-xs font-bold uppercase border border-red-500/50 bg-red-950/40 text-red-400 hover:bg-red-600 hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(239,68,68,0.2)] whitespace-nowrap"
       >
         {t.aContactText}

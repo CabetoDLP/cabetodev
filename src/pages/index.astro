@@ -18,9 +18,9 @@ import Contact from '../components/Contact.astro';
   lang="es"
 >
   <style>
-    /* Control dinámico de idioma por atributo en el contenedor raíz */
-    html[lang="es"] [data-lang="en"] { display: none !important; content-visibility: hidden !important;}
-    html[lang="en"] [data-lang="es"] { display: none !important; content-visibility: hidden !important;}
+    /* CORRECCIÓN: Solo usar display para evitar bloqueos de renderizado y scroll */
+    html[lang="es"] [data-lang="en"] { display: none !important; }
+    html[lang="en"] [data-lang="es"] { display: none !important; }
   </style>
 
   <script is:inline>
@@ -58,7 +58,7 @@ import Contact from '../components/Contact.astro';
       }
     };
 
-    // Interceptor global de scroll
+    // Interceptor global de scroll optimizado para buscar dentro del bloque activo
     document.addEventListener('click', (e) => {
       const link = e.target.closest('a');
       if (!link) return;
@@ -67,7 +67,14 @@ import Contact from '../components/Contact.astro';
       if (href && href.startsWith('#') && href.length > 1) {
         e.preventDefault();
         const targetId = href.substring(1);
-        const targetElement = document.getElementById(targetId);
+        const currentLang = document.documentElement.lang || 'es';
+        
+        // Selecciona el contenedor activo según el idioma actual
+        const activeBlock = document.querySelector(`[data-lang="${currentLang}"]`);
+        const targetElement = activeBlock 
+          ? activeBlock.querySelector(`#${targetId}`) 
+          : document.getElementById(targetId);
+
         if (targetElement) {
           targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }

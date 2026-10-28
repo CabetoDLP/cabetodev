@@ -8,9 +8,10 @@ interface Props {
 const { lang = 'spanish' } = Astro.props;
 const currentLang = (lang === 'es' ? 'spanish' : lang === 'en' ? 'english' : lang) as 'spanish' | 'english';
 const t = ui[currentLang] || ui.spanish;
+const isEn = currentLang === 'english';
 ---
 
-<section id="presentation" class="relative flex items-center justify-center px-6 pt-28 pb-12 sm:pt-32 sm:pb-16 max-w-6xl mx-auto">
+<section id={`presentation`} class="relative flex items-center justify-center px-6 pt-28 pb-12 sm:pt-32 sm:pb-16 max-w-6xl mx-auto">
   <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
     
     <!-- Columna Izquierda: Información de Presentación -->
@@ -36,14 +37,14 @@ const t = ui[currentLang] || ui.spanish;
 
       <div class="flex flex-wrap gap-4 pt-1">
         <a
-          href="#projects"
+          href={`#projects`}
           class="relative group px-7 py-3 rounded-xl font-bold text-sm tracking-wider uppercase transition-all duration-300 bg-red-600 text-white shadow-[0_0_25px_rgba(220,38,38,0.5)] hover:shadow-[0_0_35px_rgba(220,38,38,0.8)] hover:bg-red-500 active:scale-95"
         >
           {t.aProjectsText}
         </a>
 
         <a
-          href="#contact"
+          href={`#contact`}
           class="px-7 py-3 rounded-xl font-bold text-sm tracking-wider uppercase transition-all duration-300 bg-slate-900/80 text-slate-200 border border-red-500/30 hover:border-red-500/80 hover:bg-slate-800 hover:shadow-[0_0_20px_rgba(239,68,68,0.25)] active:scale-95"
         >
           {t.aContactText}
@@ -53,7 +54,7 @@ const t = ui[currentLang] || ui.spanish;
 
     <!-- Columna Derecha: Tarjeta de Perfil -->
     <div class="relative flex justify-center items-center">
-      <!-- Glow ambiental de fondo (desactivado blur excesivo en mobile) -->
+      <!-- Glow ambiental de fondo -->
       <div class="absolute inset-0 bg-gradient-to-tr from-red-600/40 via-rose-500/40 to-purple-600/40 rounded-[2.5rem] blur-xl opacity-60 pointer-events-none hidden sm:block"></div>
 
       <!-- Tarjeta aislada con CSS Containment para renderizado LCP inmediato -->
