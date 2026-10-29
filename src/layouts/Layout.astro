@@ -62,6 +62,9 @@ const jsonLdWebSite = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- PRECARGA CRÍTICA PARA MATAR EL LCP: Forzamos al navegador a descargar la imagen LCP en paralelo con el HTML -->
+    <link rel="preload" as="image" href="/profile/cabeto.webp" type="image/webp" fetchpriority="high" />
+
     <!-- PRECARGA DINÁMICA DE FUENTES CRÍTICAS -->
     <link rel="preload" href={plusJakartaWoff2} as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href={spaceGrotesk600Woff2} as="font" type="font/woff2" crossorigin="anonymous" />
@@ -102,15 +105,21 @@ const jsonLdWebSite = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLdWebSite)} />
 
     {gaId && (
-      <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-        <script is:inline define:vars={{ gaId }}>
+      <script is:inline define:vars={{ gaId }}>
+        // CARGA DIFERIDA DE GOOGLE ANALYTICS: Evita que bloquee el hilo principal en el arranque
+        window.addEventListener('load', () => {
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+          document.head.appendChild(script);
+
           window.dataLayer = window.dataLayer || [];
           function gtag(){ dataLayer.push(arguments); }
+          window.gtag = gtag;
           gtag('js', new Date());
           gtag('config', gaId);
-        </script>
-      </>
+        });
+      </script>
     )}
 
     <script is:inline>
@@ -125,7 +134,6 @@ const jsonLdWebSite = {
           const currentLang = document.documentElement.lang || 'es';
           const targetId = href.substring(1);
           
-          // Si estamos en inglés, busca primero el ID con sufijo '-en' dentro del bloque visible
           const finalId = currentLang === 'en' ? `${targetId}-en` : targetId;
           const targetElement = document.getElementById(finalId) || document.getElementById(targetId);
           
@@ -138,17 +146,16 @@ const jsonLdWebSite = {
   </head>
   
   <body class="bg-slate-950 text-white font-sans min-h-screen relative overflow-x-hidden selection:bg-red-500 selection:text-white">
-    <!-- Capas de fondo y ambientación con renderizado optimizado -->
+    <!-- Capas de fondo optimizadas para no estresar la GPU en móviles -->
     <div class="fixed inset-0 bg-[linear-gradient(to_right,#1f293750_1px,transparent_1px),linear-gradient(to_bottom,#1f293750_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_50%_80%_at_50%_50%,#000_85%,transparent_100%)] pointer-events-none z-0"></div>
-    <div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/20 rounded-full blur-[140px] pointer-events-none z-0"></div>
-    <div class="fixed bottom-10 right-10 w-[350px] h-[350px] bg-purple-600/15 rounded-full blur-[120px] pointer-events-none z-0"></div>
+    <div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-red-600/20 rounded-full blur-[80px] sm:blur-[140px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-10 right-10 w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] bg-purple-600/15 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none z-0"></div>
 
     <!-- Contenido principal inyectado -->
     <div class="relative z-10">
       <slot />
     </div>
 
-    <!-- Componentes Flotantes Adaptados a la Arquitectura por Idioma -->
     <!-- Componentes Flotantes Adaptados a la Arquitectura por Idioma -->
     <div data-lang="es">
       <Chatbot lang="es" />
@@ -179,16 +186,18 @@ const jsonLdWebSite = {
     font-display: swap;
   }
 
-  /* Control dinámico de idioma por CSS con aislamiento de renderizado */
+  /* Control dinámico de idioma optimizado para liberar el hilo principal */
   html[lang="es"] .only-en,
   html[lang="es"] [data-lang="en"] { 
     display: none !important; 
     content-visibility: hidden !important;
+    contain-intrinsic-size: auto 1500px;
   }
 
   html[lang="en"] .only-es,
   html[lang="en"] [data-lang="es"] { 
     display: none !important; 
     content-visibility: hidden !important;
+    contain-intrinsic-size: auto 1500px;
   }
 </style>

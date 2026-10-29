@@ -8,10 +8,9 @@ interface Props {
 const { lang = 'spanish' } = Astro.props;
 const currentLang = (lang === 'es' ? 'spanish' : lang === 'en' ? 'english' : lang) as 'spanish' | 'english';
 const t = ui[currentLang] || ui.spanish;
-const isEn = currentLang === 'english';
 ---
 
-<section id={`presentation`} class="relative flex items-center justify-center px-6 pt-28 pb-12 sm:pt-32 sm:pb-16 max-w-6xl mx-auto">
+<section id="presentation" class="relative flex items-center justify-center px-6 pt-28 pb-12 sm:pt-32 sm:pb-16 max-w-6xl mx-auto">
   <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
     
     <!-- Columna Izquierda: Información de Presentación -->
@@ -37,14 +36,14 @@ const isEn = currentLang === 'english';
 
       <div class="flex flex-wrap gap-4 pt-1">
         <a
-          href={`#projects`}
+          href="#projects"
           class="relative group px-7 py-3 rounded-xl font-bold text-sm tracking-wider uppercase transition-all duration-300 bg-red-600 text-white shadow-[0_0_25px_rgba(220,38,38,0.5)] hover:shadow-[0_0_35px_rgba(220,38,38,0.8)] hover:bg-red-500 active:scale-95"
         >
           {t.aProjectsText}
         </a>
 
         <a
-          href={`#contact`}
+          href="#contact"
           class="px-7 py-3 rounded-xl font-bold text-sm tracking-wider uppercase transition-all duration-300 bg-slate-900/80 text-slate-200 border border-red-500/30 hover:border-red-500/80 hover:bg-slate-800 hover:shadow-[0_0_20px_rgba(239,68,68,0.25)] active:scale-95"
         >
           {t.aContactText}
@@ -69,25 +68,28 @@ const isEn = currentLang === 'english';
             <img
               src="/icons/tech.svg" 
               alt="" 
-              width="400"
-              height="400"
+              width="390"
+              height="390"
               loading="lazy"
               decoding="async"
               class="w-full h-full object-contain opacity-80"
             />
           </div>
 
-          <!-- Capa 2: Foto de perfil optimizada dinámicamente -->
-          <img
-            src="/profile/cabeto.webp"
-            alt="Carlos de la Peña"
-            width="400"
-            height="450"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-            class="relative z-10 w-full h-full object-cover"
-          />
+          <!-- Capa 2: Foto de perfil condicional (Picture element para separar móvil y escritorio sin perder calidad) -->
+          <picture class="relative z-10 w-full h-full">
+            <source media="(max-width: 640px)" srcset="/profile/cabeto-small.webp" />
+            <img
+              src="/profile/cabeto.webp"
+              alt="Carlos de la Peña"
+              width="400"
+              height="450"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              class="w-full h-full object-cover"
+            />
+          </picture>
           
           <!-- Capa 3: Sombra de degradado inferior -->
           <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10 pointer-events-none"></div>

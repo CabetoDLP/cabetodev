@@ -119,8 +119,9 @@ const experiences = currentLang === 'english' ? [
   <div class="relative border-l-2 border-slate-800/80 ml-3 sm:ml-6 pl-6 sm:pl-10 space-y-12">
     {experiences.map((exp) => (
       <div class="relative group perspective-container">
+        <!-- Esfera de la línea de tiempo restaurada fuera del contenedor con scroll optimizado -->
         <div 
-          class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full border-4 border-slate-950 transition-all duration-300 group-hover:scale-125"
+          class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full border-4 border-slate-950 transition-all duration-300 group-hover:scale-125 z-20"
           style={`background-color: ${exp.color}; box-shadow: 0 0 12px ${exp.color};`}
         ></div>
 
@@ -187,6 +188,9 @@ const experiences = currentLang === 'english' ? [
   .card-3d {
     transform-style: preserve-3d;
     will-change: transform;
+    /* Optimizamos el renderizado únicamente en la tarjeta interior sin afectar las esferas absolutas */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 300px;
   }
 
   .perspective-container:hover .card-3d {

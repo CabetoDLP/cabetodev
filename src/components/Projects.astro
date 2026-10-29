@@ -292,6 +292,9 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
 <style>
   .carousel-viewport {
     perspective: 1000px;
+    /* OPTIMIZACIÓN CLAVE DE RENDIMIENTO: Evita cálculos de layout y estilo si no está visible en pantalla */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 480px;
   }
 
   .carousel-ring {
@@ -331,7 +334,6 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
 </style>
 
 <script>
-  // Aislamiento total: se ejecuta asíncronamente solo cuando el motor del navegador está totalmente libre
   const initProjectsSection = (section: HTMLElement) => {
     const carouselRing = section.querySelector('#carousel-ring');
     const labels = JSON.parse(section.getAttribute('data-labels') || '{}');
@@ -500,9 +502,14 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
     });
   };
 
-  // Usar setTimeout con delay 0 desvincula la ejecución del ciclo de renderizado crítico del LCP
-  setTimeout(() => {
+  const initProjectsModule = () => {
     const allProjectSections = document.querySelectorAll('#projects');
     allProjectSections.forEach((sec) => initProjectsSection(sec as HTMLElement));
-  }, 300);
+  };
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(initProjectsModule, { timeout: 1200 });
+  } else {
+    window.addEventListener('DOMContentLoaded', initProjectsModule);
+  }
 </script>
