@@ -63,10 +63,11 @@ const uiBase = {
     // Projects
     projectsTitle: 'PROYECTOS DESTACADOS',
     projectsText: 'Haz clic en cualquier proyecto para explorar sus características técnicas, arquitectura y enlaces en vivo.',
-    projectBadgeDetails: 'Ver Detalles',
+    projectBadgeDetails: 'Haz clic para ver detalles',
     modalKeyAspects: '// Aspectos Clave & Arquitectura',
     modalStackUsed: '// Stack Utilizado',
     modalLiveDemo: 'Ver Proyecto Live',
+    modalClickDetails: "Haz clic para ver detalles",
     modalGithubRepo: 'Repositorio de Github',
 
     // Servicios
@@ -281,7 +282,7 @@ const uiBase = {
     // Projects
     projectsTitle: 'FEATURED PROJECTS',
     projectsText: 'Click on any project to explore its technical specs, architecture, and live demo links.',
-    projectBadgeDetails: 'View Details',
+    projectBadgeDetails: 'Click to view details',
     modalKeyAspects: '// Key Highlights & Architecture',
     modalStackUsed: '// Tech Stack Used',
     modalLiveDemo: 'View Live Project',

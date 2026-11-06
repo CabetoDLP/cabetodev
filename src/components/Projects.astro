@@ -178,7 +178,7 @@ const cardWidth = 140;
 const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) + 60);
 ---
 
-<section id="projects" class="relative py-20 px-4 sm:px-6 max-w-[90rem] mx-auto overflow-hidden" data-labels={JSON.stringify({
+<section id="projects" class="relative py-20 px-4 sm:px-6 max-w-[90rem] mx-auto overflow-visible" data-labels={JSON.stringify({
   keyAspects: t.modalKeyAspects,
   stackUsed: t.modalStackUsed,
   liveDemo: t.modalLiveDemo,
@@ -194,7 +194,7 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
   </div>
 
   <!-- Carrusel Giratorio 3D -->
-  <div class="carousel-viewport relative w-full h-[400px] sm:h-[480px] flex items-center justify-center">
+  <div class="carousel-viewport relative w-full h-[440px] sm:h-[520px] flex items-center justify-center">
     <div 
       id="carousel-ring"
       class="carousel-ring carousel-ring-cw relative w-[130px] sm:w-[150px] h-[170px] sm:h-[190px]"
@@ -243,7 +243,7 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
     <!-- POPUP HOVER / PREVIEW DEL VIDEO (Optimizado con preload="none") -->
     <div 
       id="hover-preview"
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] sm:w-[540px] md:w-[620px] rounded-2xl bg-slate-950 border-2 border-red-500/50 overflow-hidden opacity-0 scale-90 pointer-events-none transition-all duration-300 z-40 shadow-[0_20px_60px_rgba(0,0,0,0.95)] cursor-pointer"
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] sm:w-[540px] md:w-[620px] rounded-2xl bg-slate-950 border-2 border-red-500/50 overflow-hidden opacity-0 scale-90 pointer-events-none transition-all duration-300 z-50 shadow-[0_20px_60px_rgba(0,0,0,0.95)] cursor-pointer"
     >
       <div class="relative w-full aspect-video overflow-hidden bg-slate-900">
         <video
@@ -258,7 +258,7 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
 
         <div class="absolute top-4 right-4 backdrop-blur-md bg-slate-950/80 border border-slate-700/80 px-3.5 py-1.5 rounded-full text-xs font-mono text-white flex items-center gap-2 z-10 shadow-lg">
           <span id="hover-badge-dot" class="w-2.5 h-2.5 rounded-full animate-pulse"></span>
-          <span class="font-bold">Haz clic para ver detalles</span>
+          <span class="font-bold">{t.projectBadgeDetails}</span>
         </div>
       </div>
 
@@ -294,7 +294,7 @@ const radius = Math.round((cardWidth / (2 * Math.tan(Math.PI / totalProjects))) 
     perspective: 1000px;
     /* OPTIMIZACIÓN CLAVE DE RENDIMIENTO: Evita cálculos de layout y estilo si no está visible en pantalla */
     content-visibility: auto;
-    contain-intrinsic-size: auto 480px;
+    contain-intrinsic-size: auto 520px;
   }
 
   .carousel-ring {
