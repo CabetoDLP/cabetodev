@@ -106,18 +106,18 @@ const jsonLdWebSite = {
 
     {gaId && (
       <script is:inline define:vars={{ gaId }}>
-        // CARGA DIFERIDA DE GOOGLE ANALYTICS: Evita que bloquee el hilo principal en el arranque
-        window.addEventListener('load', () => {
-          const script = document.createElement('script');
-          script.async = true;
-          script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
-          document.head.appendChild(script);
+        // gtag disponible de inmediato (los eventos tempranos quedan en cola en dataLayer);
+        // solo se difiere la DESCARGA del script de Google hasta el evento load
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function(){ dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', gaId);
 
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){ dataLayer.push(arguments); }
-          window.gtag = gtag;
-          gtag('js', new Date());
-          gtag('config', gaId);
+        window.addEventListener('load', () => {
+          const s = document.createElement('script');
+          s.async = true;
+          s.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+          document.head.appendChild(s);
         });
       </script>
     )}

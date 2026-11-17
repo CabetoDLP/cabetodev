@@ -95,6 +95,8 @@ const categories = [
                       <img
                         src={skill.icon}
                         alt={skill.name}
+                        loading="lazy"
+                        decoding="async"
                         class="w-full h-full object-contain"
                       />
                     </div>
@@ -121,6 +123,9 @@ const categories = [
 <style>
   .carousel-viewport {
     perspective: 900px;
+    /* Optimización de renderizado para evitar cálculos en elementos fuera de pantalla */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 240px;
   }
 
   .carousel-ring {
@@ -140,10 +145,10 @@ const categories = [
     animation-play-state: paused;
   }
 
-  /* Mantiene visibles las tarjetas del fondo en el espacio 3D */
   .carousel-card {
     backface-visibility: visible;
     transform-style: preserve-3d;
+    will-change: transform;
   }
 
   @keyframes rotateCarouselCW {
